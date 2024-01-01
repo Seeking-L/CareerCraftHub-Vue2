@@ -2,14 +2,21 @@
 
 <template>
   <li class="JobItem-li">
-    <h2>Title</h2>
-    <p>Some content here.</p>
+    <h5>ID:{{this.id}}</h5>
+    <h5>{{this.title}}</h5>
+    <p>{{this.description}}</p>
   </li>
 </template>
 
 <script>
 export default {
   name: "JobItem",
+  props:{
+    id:Number,
+    title:String,
+    description:String,
+    // url:String
+  }
 };
 </script>
 

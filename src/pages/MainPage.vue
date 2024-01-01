@@ -3,30 +3,21 @@
     <el-header>
       <IndexHeader />
     </el-header>
-    <!-- <div class="centerPart"> -->
-    <el-container>
-      <el-main>
-        <router-view name="Display"></router-view>
-      </el-main>
-      <el-aside width="400px">
-        <UserBlock />
-      </el-aside>
-    </el-container>
-    <!-- </div> -->
+    <router-view name="Display"></router-view>
   </el-container>
 </template>
 
 <script>
-import IndexHeader from "../components/IndexHeader.vue";
+import IndexHeader from "../components/Header.vue";
 // import JobList from "./JobList.vue";
-import UserBlock from "../components/UserBlock.vue";
+// import UserBlock from "../components/UserBlock.vue";
 
 export default {
   name: "MainPage",
   components: {
     IndexHeader,
     // JobList,
-    UserBlock,
+    // UserBlock,
   },
 };
 </script>

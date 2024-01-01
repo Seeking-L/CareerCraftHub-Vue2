@@ -22,6 +22,9 @@ const mutations = {
         state.user = null
         localStorage.removeItem('menu')
         state.menu = null
+    },
+    setPageNum(state,pageNum){
+        state.pageNum=pageNum
     }
 }
 
@@ -30,7 +33,8 @@ const state = {
     user: localStorage.getItem('user') ? localStorage.getItem('user') : null,
     //若localSorage存在token，将值赋给Vuex.state.token
     token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
-    
+    //jobList中决定展示哪一页
+    pageNum:1
 }
 
 const getters = {

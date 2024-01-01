@@ -2,25 +2,28 @@
   <div id="main_header">
     <header>
       <div class="navbar-left nav-links">
+        <router-link active-class="active-link" to="/mainpage/home">Home</router-link>
         <router-link active-class="active-link" to="/mainpage/jobs">Job</router-link>
         <router-link active-class="active-link" to="/mainpage/study">Study</router-link>
       </div>
-      <SearchBox />
     </header>
   </div>
 </template>
 
 <script>
-import SearchBox from "./SearchBox.vue";
 
 export default {
   name: "IndexHeader",
-  components: { SearchBox },
 };
 </script>
 
 <style scoped>
 /* 导航标签的样式 */
+.navbar-left.nav-links{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .navbar-left.nav-links a {
   height: 100%;
   padding: 10px 20px; /* 设置导航标签的内边距，调整大小适应内容 */
@@ -31,6 +34,7 @@ export default {
 
 /* 导航标签悬停效果 */
 .navbar-left.nav-links a:hover {
+  
   height: 100%;
   background-color: #ddd; /* 设置鼠标悬停时的背景色 */
 }
@@ -57,15 +61,15 @@ header {
   height: 3pc; /*header高度 */
   display: flex;
   align-items: center;
-  padding-left: 30.0625pc; /*字体左边距 */
+   padding-left: 40%; /*字体左边距 */
   padding-bottom: 0pt;
-  padding-right: 0.364583333in;
+  padding-right: 50%;
   padding-top: 0pt;
   /* position: relative; */
   /* position: sticky; */
   position: fixed;
   top: 0;
-  width: 100%;
+  width:90%;
   z-index: 100; /*可以调整z-index，确保导航栏在其他元素之上*/
   box-shadow: 0pt 0.052083333in 11.25pt -5.25pt rgba(0, 0, 0, 0.1);
 }

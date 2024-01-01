@@ -72,7 +72,7 @@ export default {
 .rectangle-module {
   /* position: relative; */
   position: fixed;
-
+  z-index: 100;
   /*水平：垂直需要为2：3，否则头像不为圆形 */
   width: 350px; /* 水平方向长度 */
   height: 525px; /* 垂直方向长度 */
@@ -80,13 +80,13 @@ export default {
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 外侧阴影效果 */
   overflow: hidden; /* 隐藏超出长方形的内容 */
-  background-color: #fff5f5;
+  background-color: #fffff5;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   /* margin-left: 1100px; 距离窗口左边界 1100px */
-  margin-top: 1.5pc;
+  margin-top: 3pc;
 }
 
 /* 图片样式 */
@@ -112,7 +112,7 @@ export default {
   transition: transform 0.3s ease-in-out;
 }
 
-/* 悬停效果 */
+/* 悬停效果 */z
 .rectangle-module img:hover,
 .rectangle-module p:hover {
   transform: scale(1.1);
