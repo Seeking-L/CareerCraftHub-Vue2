@@ -12,7 +12,7 @@
 <script>
 import EchartsPieChart from "@/components/EchartsPieChart.vue";
 export default {
-  name: "HomePage",
+  name: "StatsPage",
   components: {
     EchartsPieChart,
   },

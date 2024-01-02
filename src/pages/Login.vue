@@ -13,7 +13,7 @@
             ref="loginFormRef"
           >
             <el-form-item prop="userphone">
-              <el-input v-model="signinForm.userphone" placeholder="userphone" />
+              <el-input v-model="signinForm.userphone" placeholder="userphone/email" />
             </el-form-item>
             <el-form-item prop="password">
               <el-input
@@ -41,6 +41,7 @@
             v-if="ifdisplay == 1"
             :model="signupForm"
             :rules="signupFormRules"
+            ref="signupFormRef"
           >
             <el-form-item prop="newusername">
               <el-input
@@ -71,7 +72,7 @@
               />
               <el-button
                 @click.native.prevent="bindforgetSendCode"
-                :disabled="disabled"
+                :disabled="SendCodeDisabled"
                 >发送验证码</el-button
               >
             </el-form-item>
@@ -127,7 +128,8 @@ export default {
       signupForm: {
         newusername: "",
         newpassword: "",
-        newuserphone:""
+        newuserphone:"",
+
       },
       //表单验证规则
       signinFormRules: {
@@ -159,7 +161,7 @@ export default {
         newusername: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           {
-            min: 3,
+            min: 1,
             max: 10,
             message: "格式错误",
             trigger: "blur",
@@ -169,14 +171,29 @@ export default {
         newpassword: [
           { required: true, message: "请输入密码", trigger: "blur" },
           {
-            min: 6,
+            min: 1,
             max: 15,
             message: "格式错误",
             trigger: "blur",
           },
         ],
+        newuserphone:[
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          {
+            min: 1,
+            max: 1000,
+            // message: "长度在 6 到 15 个字符",
+            message: "格式错误",
+            trigger: "blur",
+          },
+        ]
       },
     };
+  },
+  computed:{
+    SendCodeDisabled(){
+      return this.signupForm.newuserphone===undefined||this.signupForm.newuserphone===''
+    }
   },
   methods: {
     SigninUI() {
@@ -247,6 +264,50 @@ export default {
             // this.$router.push('/home')
           });
       });
+    },
+    bindforgetSendCode(){
+      console.log(this.signupForm.newuserphone)
+      // 预验证 返回布尔值
+      this.$refs.signupFormRef.validate(async (valid) => {
+        // async异步和await配套
+        if (!valid) return false;
+        // 发起请求，拿到服务器返回的数据
+        http
+          .post("/sendcode", {
+            //用post方法传 输入框输入的用户手机号
+            userphone: this.signupForm.newuserphone,
+          })
+          .then((res) => {
+            if (res.status >= 200 && res.status <= 300) {
+              if (res.data.resultCode === 1 ) {
+                //do something
+              }
+              else{
+                this.$message.warning(res.error)
+              }
+            } else {
+              this.$message.error(res.error)
+              console.log(res.error);
+            }
+          })
+          .catch((error) => {
+            // 处理错误情况
+            alert("error");
+            console.log(error);
+          });
+      });
+    },
+    timer() {//
+      if (this.time > 0) {
+        this.time--;
+        // console.log(this.time);
+        this.btnTxt = this.time + "s后重新获取验证码";
+        setTimeout(this.timer, 1000);
+      } else {
+        this.time = 0;
+        this.btnTxt = "获取验证码";
+        this.disabled = false;
+      }
     },
   },
 };

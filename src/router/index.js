@@ -5,7 +5,7 @@ import StudyList from '../pages/StudyList.vue';
 import LogIn from '../pages/Login.vue'
 import MainPage from '../pages/MainPage.vue'
 import JobDetail from '../components/JobDetail.vue';
-import Home from '../pages/Home.vue';
+import StatsPage from '../pages/StatsPage.vue';
 
 const routes = [
     {
@@ -34,9 +34,9 @@ const routes = [
                 }
             },
             {
-                path:'home',
+                path:'stats',
                 components:{
-                    Display: Home
+                    Display: StatsPage
                 }
             }
         ],
@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
     // next函数，表示下一步放行
     // 如果路径是登录页，下一步
     if (to.path === '/login') return next()
-    if(to.path === '/mainpage/home') return next()//主页不用登录
+    if(to.path === '/mainpage/stats') return next()//主页不用登录
     // 获取token
     const tokenStr = localStorage.getItem('token')
     // 如果没有获取到token，返回登录页
