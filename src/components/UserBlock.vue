@@ -32,7 +32,7 @@ export default {
   computed: {
     avatarSrc: function () {
       const prefix = "http://localhost:8080/";
-      if (!this.avatar) return prefix + "statics/defaultAvatar.jpg";
+      if (!this.avatar) return prefix + "statics/headpicture.jpg";
       return prefix + "Users/" + this.userId + "/" + this.avatar;
     },
     tokenStr:function(){
