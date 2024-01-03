@@ -1,11 +1,12 @@
 // 引入axios
 import axios from 'axios'
+axios.defaults.withCredentials = true
 // 创建一个axios实例
 const http = axios.create({
 // 基础路径，发请求的时候会有api
   baseURL: 'http://localhost:8080',
   // 请求超时时间
-  timeout: 2000
+  timeout: 200000
 });
 
 // request请求拦截器

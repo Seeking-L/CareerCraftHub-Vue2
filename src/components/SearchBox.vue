@@ -1,6 +1,6 @@
 <template>
   <div class="search bar7">
-    <form>
+    <form onsubmit="return false;">
       <input type="text" placeholder="Search" v-model="content" @keyup.enter="submit"/>
       <button type="button" @click="submit"></button>
     </form>

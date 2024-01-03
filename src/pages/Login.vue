@@ -13,7 +13,10 @@
             ref="loginFormRef"
           >
             <el-form-item prop="userphone">
-              <el-input v-model="signinForm.userphone" placeholder="userphone/email" />
+              <el-input
+                v-model="signinForm.userphone"
+                placeholder="userphone/email"
+              />
             </el-form-item>
             <el-form-item prop="password">
               <el-input
@@ -62,22 +65,31 @@
                 type="text"
                 placeholder="userphone"
                 v-model="signupForm.newuserphone"
+                :disabled="inputPhoneDisabled"
               />
             </el-form-item>
             <el-form-item>
-                <el-input
+              <el-input
                 class="bind_code_input code"
                 type="text"
                 placeholder="请输入验证码"
-              />
-              <el-button
-                @click.native.prevent="bindforgetSendCode"
-                :disabled="SendCodeDisabled"
-                >发送验证码</el-button
+                :disabled="inputCodeDisabled"
+                v-model="signupForm.code"
               >
+                <el-button
+                  slot="append"
+                  @click.native.prevent="bindforgetSendCode"
+                  :disabled="sendCodeDisabled"
+                  >{{ this.btnTxt }}</el-button
+                >
+              </el-input>
             </el-form-item>
             <el-form-item>
-              <button type="button" class="inupbutton">
+              <button
+                type="button"
+                class="inupbutton"
+                @click="tryRegister"
+              >
                 Sign up
               </button>
             </el-form-item>
@@ -128,8 +140,8 @@ export default {
       signupForm: {
         newusername: "",
         newpassword: "",
-        newuserphone:"",
-
+        newuserphone: "",
+        code: "",
       },
       //表单验证规则
       signinFormRules: {
@@ -177,23 +189,34 @@ export default {
             trigger: "blur",
           },
         ],
-        newuserphone:[
-          { required: true, message: "请输入手机号", trigger: "blur" },
+        newuserphone: [
+          { required: true, trigger: "blur", message: "请输入11位手机号" },
           {
-            min: 1,
-            max: 1000,
-            // message: "长度在 6 到 15 个字符",
-            message: "格式错误",
+            required: true,
+            trigger: "blur",
+            min: 11,
+            max: 11,
+            message: "长度不符合",
+          },
+          {
+            pattern: /^1[35789]\d{9}$/,
+            message: "请输入正确的手机号",
             trigger: "blur",
           },
-        ]
+        ],
+        code: [],
       },
+
+      //验证码按钮
+      btnTxt: "获取验证码", //验证码按钮上的文字
+      codeBtnTime: 60, //点击后的倒计时
+      sendCodeDisabled: false, //是否可用
+      //验证码输入
+      inputCodeDisabled: true,
+
+      //注册手机号
+      inputPhoneDisabled: false, //注册页手机号输入是否可改
     };
-  },
-  computed:{
-    SendCodeDisabled(){
-      return this.signupForm.newuserphone===undefined||this.signupForm.newuserphone===''
-    }
   },
   methods: {
     SigninUI() {
@@ -233,21 +256,20 @@ export default {
           })
           .then((res) => {
             if (res.status >= 200 && res.status <= 300) {
-              if (res.data.resultCode === 1 ) {
-                this.$message.success("登录成功")
-                console.log(res.data.data.token)
+              if (res.data.resultCode === 1) {
+                this.$message.success("登录成功");
+                console.log(res.data.data.token);
                 //存储token和user对象到localstorage
-                this.$store.commit('setToken',res.data.data.token)
-                this.$store.commit('setUser',res.data.data.user)
+                this.$store.commit("setToken", res.data.data.token);
+                this.$store.commit("setUser", res.data.data.user);
                 this.$router.replace({
                   path: "/",
                 });
-              }
-              else{
-                this.$message.warning("账号或密码错误")
+              } else {
+                this.$message.warning(res.data.msg);
               }
             } else {
-              this.$message.error("error")
+              this.$message.error("error");
               console.log(res.error);
             }
           })
@@ -265,8 +287,8 @@ export default {
           });
       });
     },
-    bindforgetSendCode(){
-      console.log(this.signupForm.newuserphone)
+    bindforgetSendCode() {
+      console.log(this.signupForm.newuserphone);
       // 预验证 返回布尔值
       this.$refs.signupFormRef.validate(async (valid) => {
         // async异步和await配套
@@ -279,14 +301,34 @@ export default {
           })
           .then((res) => {
             if (res.status >= 200 && res.status <= 300) {
-              if (res.data.resultCode === 1 ) {
-                //do something
-              }
-              else{
-                this.$message.warning(res.error)
+              if (res.data.resultCode === 1) {
+                //后端已成功发送验证码
+                this.codeBtnTime = 60;
+                this.sendCodeDisabled = true;
+                //调用倒计时方法
+                this.timer();
+                this.inputPhoneDisabled = true;
+                this.inputCodeDisabled = false;
+                this.signinFormRules.code = [
+                  //添加code的校验规则
+                  {
+                    required: true,
+                    trigger: "blur",
+                    message: "请输入6位验证码",
+                  },
+                  {
+                    required: true,
+                    trigger: "blur",
+                    min: 6,
+                    max: 6,
+                    message: "验证码错误",
+                  },
+                ];
+              } else {
+                this.$message.warning(res.data.msg);
               }
             } else {
-              this.$message.error(res.error)
+              this.$message.error(res.error);
               console.log(res.error);
             }
           })
@@ -297,17 +339,60 @@ export default {
           });
       });
     },
-    timer() {//
-      if (this.time > 0) {
-        this.time--;
-        // console.log(this.time);
-        this.btnTxt = this.time + "s后重新获取验证码";
+    timer() {
+      //验证码发送按钮倒计时
+      if (this.codeBtnTime > 0) {
+        this.codeBtnTime--;
+        this.btnTxt = this.codeBtnTime + "s";
         setTimeout(this.timer, 1000);
       } else {
-        this.time = 0;
+        this.codeBtnTime = 0;
         this.btnTxt = "获取验证码";
-        this.disabled = false;
+        this.sendCodeDisabled = false;
+        this.inputPhoneDisabled = false;
       }
+    },
+    tryRegister() {
+      console.log(this.signupForm.newuserphone);
+      // 预验证 返回布尔值
+      this.$refs.signupFormRef.validate(async (valid) => {
+        // async异步和await配套
+        if (!valid) return false;
+        // 发起请求，拿到服务器返回的数据
+        http
+          .post("/register", {
+            //用post方法传 输入框输入的注册信息
+            username: this.signupForm.newusername,
+            userphone: this.signupForm.newuserphone,
+            password: this.signupForm.newpassword,
+            code: this.signupForm.code,
+          })
+          .then((res) => {
+            if (res.status >= 200 && res.status <= 300) {
+              if (res.data.resultCode === 1) {
+                //do something
+                this.$message.success("注册成功");
+                console.log(res.data.data.token);
+                //存储token和user对象到localstorage
+                this.$store.commit("setToken", res.data.data.token);
+                this.$store.commit("setUser", res.data.data.user);
+                this.$router.replace({
+                  path: "/",
+                });
+              } else {
+                this.$message.warning(res.data.msg);
+              }
+            } else {
+              this.$message.error(res.error);
+              console.log(res.error);
+            }
+          })
+          .catch((error) => {
+            // 处理错误情况
+            alert("error");
+            console.log(error);
+          });
+      });
     },
   },
 };
@@ -476,13 +561,17 @@ h1 {
   flex-direction: column;
 }
 
-el-input {
+.el-input {
   background-color: #eee;
   border: none;
-  padding: 12px 15px;
-  margin: 10px 0;
+  /* padding: 12px 15px; */
+  margin: 3px 0;
   width: 240px;
 }
+.el-button {
+  margin: 0 0;
+}
+
 h3 {
   font-size: 10px;
   margin-top: 10px;
@@ -498,6 +587,7 @@ h3 {
   color: #fff;
   text-align: center;
   line-height: 40px;
-  margin-top: 30px;
+  margin-top: 25px;
+  margin-left: 10%;
 }
 </style>

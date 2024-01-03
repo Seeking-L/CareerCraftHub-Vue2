@@ -141,7 +141,7 @@ export default {
         // 处理错误情况
         this.$message.error(error);
         console.log(error);
-        this.$router.go(-1);
+        // this.$router.go(-1);
       });
   },
 
