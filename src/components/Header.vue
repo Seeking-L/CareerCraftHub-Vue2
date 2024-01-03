@@ -2,7 +2,11 @@
   <div id="main_header">
     <header>
       <div class="navbar-left nav-links">
-        <router-link active-class="active-link" to="/mainpage/stats">stats</router-link>
+        <i class="iconfonthome icon-home"></i>
+        <i class="iconfontstats icon-stats"></i>
+        <i class="iconfont icon-job"></i>
+        <i class="iconfont icon-study"></i>
+        <router-link active-class="active-link" to="/mainpage/stats">Stats</router-link>
         <router-link active-class="active-link" to="/mainpage/jobs">Job</router-link>
         <router-link active-class="active-link" to="/mainpage/study">Study</router-link>
       </div>
@@ -61,9 +65,9 @@ header {
   height: 3pc; /*header高度 */
   display: flex;
   align-items: center;
-   padding-left: 40%; /*字体左边距 */
+  padding-left: 10%;  /* 字体左边距 */
   padding-bottom: 0pt;
-  padding-right: 50%;
+  padding-right: 0%;
   padding-top: 0pt;
   /* position: relative; */
   /* position: sticky; */

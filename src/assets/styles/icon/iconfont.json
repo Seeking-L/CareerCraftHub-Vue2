@@ -1,0 +1,37 @@
+{
+  "id": "4397650",
+  "name": "cch",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5849190",
+      "name": "首页",
+      "font_class": "home",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "24890816",
+      "name": "Search-Job",
+      "font_class": "job",
+      "unicode": "e83c",
+      "unicode_decimal": 59452
+    },
+    {
+      "icon_id": "14816561",
+      "name": "统计",
+      "font_class": "stats",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "150674",
+      "name": "学习书本",
+      "font_class": "study",
+      "unicode": "e708",
+      "unicode_decimal": 59144
+    }
+  ]
+}
