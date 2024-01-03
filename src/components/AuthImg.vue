@@ -1,5 +1,5 @@
 <template>
-    <img ref="myImage" :alt="alt" />
+    <img ref="myImage" :alt="alt" class="auth-img" />
 </template>
 
 <script>
@@ -73,3 +73,18 @@ export default {
   },
 };
 </script>
+
+<!-- 在 AuthImg.vue 组件中添加样式 -->
+<style scoped>
+.auth-img {
+  max-width: 50px; /* 设置最大宽度，可以根据需要进行调整 */
+  max-height: 50px; /* 设置最大高度，可以根据需要进行调整 */
+  border-radius: 50%; /* 使图像呈圆形 */
+  margin-left: 20px;
+  cursor: pointer; /* 添加指针样式，以表示可点击 */
+}
+
+.auth-img:hover {
+  transform: scale(1.1); /* 添加鼠标悬停时的缩放效果，可以根据需要进行调整 */
+}
+</style>
