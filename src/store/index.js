@@ -20,11 +20,12 @@ const mutations = {
         state.token = null
         localStorage.removeItem('user')
         state.user = null
-        localStorage.removeItem('menu')
-        state.menu = null
     },
     setPageNum(state,pageNum){
         state.pageNum=pageNum
+    },
+    setSearchBoxContent(state,searchBoxContent){
+        state.searchBoxContent=searchBoxContent
     }
 }
 
@@ -34,7 +35,8 @@ const state = {
     //若localSorage存在token，将值赋给Vuex.state.token
     token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
     //jobList中决定展示哪一页
-    pageNum:1
+    pageNum:1,
+    searchBoxContent:""
 }
 
 const getters = {

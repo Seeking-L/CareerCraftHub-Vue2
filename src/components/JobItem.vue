@@ -29,7 +29,7 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
   transition: transform 0.3s ease-in-out; /* 悬浮时的平滑过渡效果 */
-  width:800px;/*水平长度 */
+  width:600px;/*水平长度 */
 
   /* 初始状态 */
   background-color: #fffff5;

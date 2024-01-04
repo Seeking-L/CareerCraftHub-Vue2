@@ -33,7 +33,11 @@ export default {
     handlePageChange(currentPage) {
       this.$store.commit("setPageNum", currentPage); // 在此刷新数据
       this.listPageChange(this.tablePage.pageSize);
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      // 滚动到页面顶部
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // 可以选择 'auto' 或者 'smooth'
+      });
     },
   },
 };
@@ -41,6 +45,6 @@ export default {
 
 <style>
 .pagination {
-  margin-left: 24%;
+  margin-left: 36%;
 }
 </style>

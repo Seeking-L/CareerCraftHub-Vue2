@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   color:gold;
   margin-right: 10%;
+  cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
 .iconfontstats {
   font-family: "iconfont" !important;
@@ -21,8 +22,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color:gold;
-
-
+  cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -32,6 +32,7 @@
   -moz-osx-font-smoothing: grayscale;
   color:gold;
   margin-left: 10%;
+  cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
 
 .icon-home:before {

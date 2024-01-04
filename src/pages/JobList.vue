@@ -1,35 +1,45 @@
 <template>
   <el-container>
     <el-main>
-      <ul class="JobList-ul">
-        <JobItem
-          v-for="item in itemsOnShow"
-          :key="item.jobItemId"
-          :id="item.jobItemId"
-          :title="item.title"
-          :description="item.description"
-          @click.native="toJobDetail(item.url)"
-        />
-      </ul>
+      <el-row>
+        <el-col :span="12">
+          <ul class="JobList-ul">
+            <JobItem
+              v-for="item in itemsOnShow1"
+              :key="item.jobItemId"
+              :id="item.jobItemId"
+              :title="item.title"
+              :description="item.description"
+              @click.native="toJobDetail(item.url)"
+            />
+          </ul>
+        </el-col>
+        <el-col :span="12">
+          <ul class="JobList-ul">
+            <JobItem
+              v-for="item in itemsOnShow2"
+              :key="item.jobItemId"
+              :id="item.jobItemId"
+              :title="item.title"
+              :description="item.description"
+              @click.native="toJobDetail(item.url)"
+            />
+          </ul>
+        </el-col>
+      </el-row>
       <Pagination :listPageChange="listPageChange" :total="this.total" />
     </el-main>
-    <el-aside width="400px">
-      <SearchBox :listNowChange="listNowChange" />
-      <UserBlock />
-    </el-aside>
   </el-container>
 </template>
 
 <script>
 import JobItem from "../components/JobItem.vue";
-import UserBlock from "../components/UserBlock.vue";
-import SearchBox from "../components/SearchBox.vue";
 import http from "../util/request";
 import Pagination from "../components/Pagination.vue";
 
 export default {
   name: "JobList",
-  components: { JobItem, UserBlock, SearchBox, Pagination },
+  components: { JobItem, Pagination },
   data() {
     return {
       jobItems: [], //所有数据
@@ -44,7 +54,8 @@ export default {
       window.location.href =
         "http://" + url + "?backurl=" + window.location.href;
     },
-    listPageChange(pageSize) {//传给pagination
+    listPageChange(pageSize) {
+      //传给pagination
       //pagination改变页面
       let pageNum = this.$store.state.pageNum;
       this.itemsOnShow = this.listNow.slice(
@@ -52,14 +63,33 @@ export default {
         pageNum * pageSize
       );
     },
-    listNowChange(str) {//传给searchbox
-      console.log("searching------------------------" + str);
-      this.listNow = this.jobItems.filter((item) => {
-        return item.title.includes(str);
-      });
-      this.$store.commit("setPageNum", 1);
-      this.itemsOnShow = this.listNow.slice(0, 10);
-      this.total = this.listNow.length;
+  },
+  computed: {
+    searchBoxContent() {
+      return this.$store.state.searchBoxContent;
+    },
+    itemsOnShow1() {
+      const middleIndex = Math.ceil(this.itemsOnShow.length / 2);
+
+      return this.itemsOnShow.slice(0, middleIndex);
+    },
+    itemsOnShow2() {
+      const middleIndex = Math.ceil(this.itemsOnShow.length / 2);
+
+      return this.itemsOnShow.slice(middleIndex);
+    },
+  },
+  watch: {
+    searchBoxContent: {
+      handler: function (str) {
+        console.log("JobList searching------------------------" + str);
+        this.listNow = this.jobItems.filter((item) => {
+          return item.title.includes(str);
+        });
+        this.$store.commit("setPageNum", 1);
+        this.itemsOnShow = this.listNow.slice(0, 10);
+        this.total = this.listNow.length;
+      },
     },
   },
   created() {
@@ -101,7 +131,7 @@ export default {
 <style scoped>
 .JobList-ul {
   /*与页面左边界的距离 */
-  margin-left: 5%;
+  margin-left: 3%;
   margin-top: -1%;
 }
 </style>

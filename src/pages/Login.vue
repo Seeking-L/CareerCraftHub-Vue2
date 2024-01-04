@@ -266,7 +266,7 @@ export default {
                   path: "/",
                 });
               } else {
-                this.$message.warning(res.data.msg);
+                this.$message.warning(res.data.message);
               }
             } else {
               this.$message.error("error");
@@ -325,7 +325,7 @@ export default {
                   },
                 ];
               } else {
-                this.$message.warning(res.data.msg);
+                this.$message.warning(res.data.message);
               }
             } else {
               this.$message.error(res.error);
@@ -380,7 +380,7 @@ export default {
                   path: "/",
                 });
               } else {
-                this.$message.warning(res.data.msg);
+                this.$message.warning(res.data.message);
               }
             } else {
               this.$message.error(res.error);
