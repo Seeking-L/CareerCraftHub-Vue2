@@ -6,6 +6,8 @@ import LogIn from '../pages/Login.vue'
 import MainPage from '../pages/MainPage.vue'
 import JobDetail from '../components/JobDetail.vue';
 import StatsPage from '../pages/StatsPage.vue';
+import PersonalPage from "../pages/PersonalPage.vue";
+import TestPage from "../pages/TestPage.vue";
 
 const routes = [
     {
@@ -38,7 +40,19 @@ const routes = [
                 components:{
                     Display: StatsPage
                 }
-            }
+            },
+            {
+                path:'personal',
+                components:{
+                    Display:PersonalPage
+                }
+            },
+            {
+                path:'test',
+                components:{
+                    Display:TestPage
+                }
+            },
         ],
         redirect: '/mainpage/jobs'
     },

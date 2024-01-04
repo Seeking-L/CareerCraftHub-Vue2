@@ -3,11 +3,12 @@
     placement="bottom-start"
     width="150"
     trigger="hover"
-    open-delay="500"
+    :open-delay=500
     style="text-align: center !important"
   >
-    <h3 style="text-align: center !important">{{ this.username }}</h3>
-    <el-menu class="el-menu-vertical-demo">
+    <h3 style="text-align: center !important" v-show="this.ifshowMenu">{{ this.username }}</h3>
+    <UpLoadAvatar v-show="!this.ifshowMenu" />
+    <el-menu class="el-menu-vertical-demo" v-show="this.ifshowMenu">
       <el-menu-item
         index="2"
         @click.native="toPersonalPage"
@@ -30,12 +31,15 @@
 </template>
 
 <script>
+import UpLoadAvatar from './UpLoadAvatar.vue';
 export default {
   name: "ImgVue",
+  components:{UpLoadAvatar},
   props: {
     imgUrl: String,
     authToken: String,
     alt: String,
+    ifshowMenu: Boolean
   },
   computed: {
     username: function () {
@@ -100,6 +104,9 @@ export default {
         path: "/login",
       });
     },
+    changeAvatar(){
+
+    }
   },
 };
 </script>
@@ -110,7 +117,7 @@ export default {
   max-width: 50px; /* 设置最大宽度，可以根据需要进行调整 */
   max-height: 50px; /* 设置最大高度，可以根据需要进行调整 */
   border-radius: 50%; /* 使图像呈圆形 */
-  margin-left: 30px;
+  margin-left: 0px;
   cursor: pointer; /* 添加指针样式，以表示可点击 */
   transition: transform 0.3s ease; /*平滑变大*/
 }
@@ -130,7 +137,5 @@ export default {
 .auth-img:not(:hover) {
   transition-delay: 0.3s; /* 恢复原样时仍然保持 0.3 秒的延迟 */
 }
-.el-popover__title {
-  text-align: center !important; /* 将标题居中 */
-}
+
 </style>

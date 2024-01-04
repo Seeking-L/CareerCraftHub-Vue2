@@ -36,7 +36,8 @@ const state = {
     token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
     //jobList中决定展示哪一页
     pageNum:1,
-    searchBoxContent:""
+    searchBoxContent:"",
+    IP:"localhost"
 }
 
 const getters = {

@@ -3,11 +3,15 @@
   <div class="rectangle-module">
     <!-- <img :src=avatarSrc alt="Image" @click="pushShow" /> -->
     <!-- <Img :imgUrl="avatarSrc" :authToken="tokenStr" @click="pushShow" /> -->
-    <authImg :imgUrl="avatarSrc" :authToken="tokenStr" alt="Image" @click.native="pushShow"></authImg>
-    <p>Name: {{ userName }}</p>
-    <p>Id: {{ userId }}</p>
-    <p>Phone: {{ userPhone }}</p>
-    <p>password: {{ password }}</p>
+    <authImg 
+    :imgUrl="avatarSrc" 
+    :authToken="tokenStr" 
+    :ifshowMenu=false
+    alt="Image" @click.native="pushShow"></authImg>
+    <h3>{{ this.user.userName }}</h3>
+    <p>邮箱: {{ this.user.email }}</p>
+    <p>电话: {{ this.user.userPhone }}</p>
+    <p>城市: {{ this.user.city }}</p>
   </div>
 </template>
 
@@ -21,22 +25,20 @@ export default {
   },
   data() {
     return {
-      userName: "",
-      userPhone: "",
-      userId: "",
-      password: "",
       avatar: "",
-      
     };
   },
   computed: {
     avatarSrc: function () {
-      const prefix = "http://localhost:8080/";
+      const prefix = "http://"+this.$store.state.IP+":8080/";
       if (!this.avatar) return prefix + "statics/headpicture.jpg";
-      return prefix + "Users/" + this.userId + "/" + this.avatar;
+      return prefix + "Users/" + this.user.userId + "/" + this.avatar;
     },
     tokenStr:function(){
       return localStorage.getItem("token");
+    },
+    user:function(){
+      return JSON.parse(this.$store.state.user)
     }
   },
   methods: {
@@ -58,10 +60,6 @@ export default {
     const userStr = localStorage.getItem("user");
     if (!userStr) this.$router.push("/login");
     const user = JSON.parse(userStr);
-    this.userName = user.userName;
-    this.userId = user.userId;
-    this.userPhone = user.userPhone;
-    this.password = user.password;
     this.avatar = user.avatar;
   },
 };
@@ -117,4 +115,5 @@ export default {
 .rectangle-module p:hover {
   transform: scale(1.1);
 }
+
 </style>

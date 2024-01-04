@@ -1,10 +1,17 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4397650 */
-  src: url('iconfont.woff2?t=1704268016084') format('woff2'),
-       url('iconfont.woff?t=1704268016084') format('woff'),
-       url('iconfont.ttf?t=1704268016084') format('truetype');
+  src: url('iconfont.woff2?t=1704348571224') format('woff2'),
+       url('iconfont.woff?t=1704348571224') format('woff'),
+       url('iconfont.ttf?t=1704348571224') format('truetype');
 }
 
+/* .iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
 .iconfonthome {
   font-family: "iconfont" !important;
   font-size: 30px;
@@ -33,6 +40,20 @@
   color:gold;
   margin-left: 10%;
   cursor: pointer; /* 添加指针样式，以表示可点击 */
+}
+.iconfonttest {
+  font-family: "iconfont" !important;
+  font-size: 30px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color:gold;
+  margin-left: 10%;
+  margin-right: 20px;
+  cursor: pointer; /* 添加指针样式，以表示可点击 */
+}
+.icon-test:before {
+  content: "\e690";
 }
 
 .icon-home:before {

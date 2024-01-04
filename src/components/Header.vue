@@ -9,9 +9,11 @@
         <i class="iconfontstats icon-stats"  @click="toStats"></i>
         <i class="iconfont icon-job" @click="toJob"></i>
         <i class="iconfont icon-study" @click="toStudy"></i>
+        <i class="iconfonttest icon-test" @click="toTest"></i>
         <authImg
           :imgUrl="avatarSrc"
           :authToken="tokenStr"
+          :ifshowMenu=true
           alt="Image"
           @click.native="toPersonalPage"
         ></authImg>
@@ -38,7 +40,7 @@ export default {
   },
   computed: {
     avatarSrc: function () {
-      const prefix = "http://localhost:8080/";
+      const prefix = "http://"+this.$store.state.IP+":8080/";
       if (!this.avatar) return prefix + "statics/defaultAvatar.jpg";
       return prefix + "Users/" + this.userId + "/" + this.avatar;
     },
@@ -70,9 +72,14 @@ export default {
         path: "/mainpage/study",
       });
     },
+    toTest(){
+      this.$router.push({
+        path: "/mainpage/test",
+      });
+    },
     toPersonalPage() {
       this.$router.push({
-        path: "/login",
+        path: "/mainpage/personal",
       });
     },
   },
