@@ -259,9 +259,10 @@ export default {
               if (res.data.resultCode === 1) {
                 this.$message.success("登录成功");
                 console.log(res.data.data.token);
-                //存储token和user对象到localstorage
+                //存储token和user和resume对象到localstorage
                 this.$store.commit("setToken", res.data.data.token);
                 this.$store.commit("setUser", res.data.data.user);
+                this.$store.commit("setResume",res.data.data.resume)
                 this.$router.replace({
                   path: "/",
                 });
@@ -373,9 +374,10 @@ export default {
                 //do something
                 this.$message.success("注册成功");
                 console.log(res.data.data.token);
-                //存储token和user对象到localstorage
+                //存储token和user和resume对象到localstorage
                 this.$store.commit("setToken", res.data.data.token);
                 this.$store.commit("setUser", res.data.data.user);
+                this.$store.commit("setResume",res.data.data.resume)
                 this.$router.replace({
                   path: "/",
                 });

@@ -26,6 +26,10 @@ const mutations = {
     },
     setSearchBoxContent(state,searchBoxContent){
         state.searchBoxContent=searchBoxContent
+    },
+    setResume(state,resume){
+        state.resume=resume
+        localStorage.setItem('resume', JSON.stringify(resume))
     }
 }
 
@@ -37,7 +41,8 @@ const state = {
     //jobList中决定展示哪一页
     pageNum:1,
     searchBoxContent:"",
-    IP:"localhost"
+    IP:"localhost",
+    resume:localStorage.getItem('resume')?localStorage.getItem('resume') :null,
 }
 
 const getters = {
