@@ -89,7 +89,7 @@ export default {
     },
     toPersonalPage() {
       this.$router.push({
-        path: "/login",
+        path: "/mainpage/personal",
       });
     },
     logout() {
@@ -104,9 +104,6 @@ export default {
         path: "/login",
       });
     },
-    changeAvatar(){
-
-    }
   },
 };
 </script>

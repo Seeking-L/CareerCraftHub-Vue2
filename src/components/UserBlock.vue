@@ -32,7 +32,7 @@ export default {
     avatarSrc: function () {
       const prefix = "http://"+this.$store.state.IP+":8080/";
       if (!this.avatar) return prefix + "statics/headpicture.jpg";
-      return prefix + "Users/" + this.user.userId + "/" + this.avatar;
+      return prefix + "Users/" + this.user.userId + "/avatar/" + this.avatar;
     },
     tokenStr:function(){
       return localStorage.getItem("token");
@@ -72,7 +72,7 @@ export default {
   position: fixed;
   z-index: 100;
   /*水平：垂直需要为2：3，否则头像不为圆形 */
-  width: 350px; /* 水平方向长度 */
+  width: 300px; /* 水平方向长度 */
   height: 525px; /* 垂直方向长度 */
 
   border-radius: 15px;
@@ -84,24 +84,11 @@ export default {
   justify-content: center;
   align-items: center;
   /* margin-left: 1100px; 距离窗口左边界 1100px */
-  margin-top: 3pc;
+  margin-top: 1pc;
+  margin-left: 1pc;
 }
 
-/* 图片样式 */
-.rectangle-module img {
-  display: block;
-  margin: -200px auto 0; /* 将左右外边距设置为 auto，使图片在水平方向上居中 */
 
-  clip-path: circle(50% at center); /* 使用clip-path将图片截取为圆形 */
-
-  /*依赖长方形模块的水平、垂直长度来保持圆形 */
-  width: 33%;
-  height: 22%;
-
-  max-width: 100%; /* 设置图片最大宽度为100% */
-  border-radius: 50%; /* 将图片的边框半径设置为50%，使其呈圆形 */
-  transition: transform 0.3s ease-in-out;
-}
 
 /* 文字样式 */
 .rectangle-module p {

@@ -42,7 +42,7 @@ export default {
     avatarSrc: function () {
       const prefix = "http://"+this.$store.state.IP+":8080/";
       if (!this.avatar) return prefix + "statics/defaultAvatar.jpg";
-      return prefix + "Users/" + this.userId + "/" + this.avatar;
+      return prefix + "Users/" + this.userId + "/avatar/" + this.avatar;
     },
     tokenStr: function () {
       return localStorage.getItem("token");

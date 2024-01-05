@@ -1,23 +1,37 @@
 <template>
-<el-container>
+  <el-container>
     <el-aside width="400px">
-        <UserBlock/>
+      <UserBlock />
     </el-aside>
     <el-main>
-        <h1>这里是简历</h1>
+      <Resume />
     </el-main>
-</el-container>
-  
+  </el-container>
 </template>
 
 <script>
-import UserBlock from "../components/UserBlock.vue"
+import UserBlock from "../components/UserBlock.vue";
+import Resume from "../components/Resume.vue";
+
 export default {
-    name:"PersonalPage",
-    components:{UserBlock,}
-}
+  name: "PersonalPage",
+  components: { UserBlock, Resume },
+  data() {
+    return {
+      form: {
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: "",
+      },
+    };
+  },
+};
 </script>
 
 <style>
-
 </style>
