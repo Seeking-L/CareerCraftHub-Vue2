@@ -98,7 +98,7 @@
       <el-col :span="5">
         <el-cascader
           size="large"
-          :options="cityoptions"
+          :options="pcTextArr"
           v-model="cityselectedOptions"
           :disabled="cityRO"
           @change="changeCity"
@@ -203,8 +203,8 @@
     >
       <el-col :span="8">
         <el-input
-        type="textarea"
-        :autosize="{ minRows: 3, maxRows: 10}"
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 10 }"
           v-model="Resume.personal_advantages"
           :readonly="personal_advantagesRO"
           @change="changepersonal_advantages"
@@ -312,7 +312,7 @@
       <el-col :span="5">
         <el-cascader
           size="large"
-          :options="work_cityoptions"
+          :options="pcTextArr"
           v-model="work_cityselectedOptions"
           :disabled="work_cityRO"
           @change="changework_city"
@@ -366,7 +366,12 @@
       <el-col :span="17"> </el-col>
     </el-row>
     <ul>
-      <el-form v-for="(experience, index) in Resume.experiences" :key="index" label-width="100px" style="margin-left:-40px">
+      <el-form
+        v-for="(experience, index) in Resume.experiences"
+        :key="index"
+        label-width="100px"
+        style="margin-left: -40px"
+      >
         <el-form-item
           label="公司名称"
           @mouseover.native="experienceTools[index].toolcompany_name = true"
@@ -458,8 +463,8 @@
         >
           <el-col :span="10">
             <el-input
-            type="textarea"
-        :autosize="{ minRows: 3, maxRows: 10}"
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
               v-model="experience.job_description"
               :readonly="experiencesRO"
               @change="changeexperiences"
@@ -515,7 +520,12 @@
       <el-col :span="17"> </el-col>
     </el-row>
     <ul>
-      <el-form v-for="(project, index) in Resume.projects" :key="index" label-width="100px" style="margin-left:-40px">
+      <el-form
+        v-for="(project, index) in Resume.projects"
+        :key="index"
+        label-width="100px"
+        style="margin-left: -40px"
+      >
         <el-form-item
           label="项目名称"
           @mouseover.native="projectsTools[index].toolproject_name = true"
@@ -590,8 +600,8 @@
         >
           <el-col :span="10">
             <el-input
-            type="textarea"
-        :autosize="{ minRows: 3, maxRows: 10}"
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
               v-model="project.project_description"
               :readonly="projectsRO"
               @change="changeprojects"
@@ -617,8 +627,8 @@
         >
           <el-col :span="10">
             <el-input
-            type="textarea"
-        :autosize="{ minRows: 3, maxRows: 10}"
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
               v-model="project.project_performance"
               :readonly="projectsRO"
               @change="changeprojects"
@@ -674,7 +684,12 @@
       <el-col :span="17"> </el-col>
     </el-row>
     <ul>
-      <el-form v-for="(education, index) in Resume.educations" :key="index" label-width="100px" style="margin-left:-40px">
+      <el-form
+        v-for="(education, index) in Resume.educations"
+        :key="index"
+        label-width="100px"
+        style="margin-left: -40px"
+      >
         <el-form-item
           label="学校名称"
           @mouseover.native="educationsTools[index].tooluniversity = true"
@@ -766,8 +781,8 @@
         >
           <el-col :span="10">
             <el-input
-            type="textarea"
-        :autosize="{ minRows: 3, maxRows: 10}"
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
               v-model="education.major_courses"
               :readonly="educationsRO"
               @change="changeeducations"
@@ -810,8 +825,8 @@
         >
           <el-col :span="10">
             <el-input
-            type="textarea"
-        :autosize="{ minRows: 3, maxRows: 10}"
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
               v-model="education.study_experience"
               :readonly="educationsRO"
               @change="changeeducations"
@@ -836,8 +851,8 @@
     >
       <el-col :span="10">
         <el-input
-        type="textarea"
-        :autosize="{ minRows: 3, maxRows: 10}"
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 10 }"
           v-model="Resume.honor_name"
           :readonly="honor_nameRO"
           @change="changehonor_name"
@@ -872,7 +887,7 @@
       <el-form
         v-for="(certificate_name, index) in Resume.certificate"
         :key="index"
-        style="margin-left:-40px"
+        style="margin-left: -40px"
       >
         <el-form-item
           label="证书"
@@ -901,7 +916,7 @@
           <el-col :span="11"> </el-col>
         </el-form-item>
       </el-form>
-      <hr style="margin-left:-40px"/>
+      <hr style="margin-left: -40px" />
     </ul>
     <el-form-item
       label="课余经历"
@@ -910,8 +925,8 @@
     >
       <el-col :span="12">
         <el-input
-        type="textarea"
-        :autosize="{ minRows: 3, maxRows: 20}"
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 20 }"
           v-model="Resume.organization"
           :readonly="organizationRO"
           @change="changeorganization"
@@ -933,8 +948,8 @@
     >
       <el-col :span="15">
         <el-input
-        type="textarea"
-        :autosize="{ minRows: 3, maxRows: 20}"
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 20 }"
           v-model="Resume.major_skills"
           :readonly="major_skillsRO"
           @change="changemajor_skills"
@@ -953,9 +968,13 @@
 </template>
 
 <script>
-import { provinceAndCityData, codeToText } from "element-china-area-data";
+import {
+  // provinceAndCityData,
+  // codeToText,
+  // TextToCode,
+  pcTextArr,
+} from "element-china-area-data";
 import http from "../util/request";
-
 export default {
   name: "ResumeComponent",
   data() {
@@ -968,16 +987,18 @@ export default {
         graduation_year: "2022",
         tel: "123456789",
         birthday_date: "2000-01-01",
-        city: "某地",
+        city: "北京市/朝阳区",
         email: "zhangsan@example.com",
         job_status: "考虑机会",
         personal_advantages: "沟通能力强，团队协作",
-        expected_industry: "IT",
-        expected_position: "软件工程师",
-        position_details: "Web开发",
-        salary_requirements: "15000元/月",
-        work_city: "北京",
-        other_city: "上海",
+        expectation: {
+          expected_industry: "IT",
+          expected_position: "软件工程师",
+          position_details: "Web开发",
+          salary_requirements: "15000元/月",
+          work_city: "北京市/朝阳区",
+          other_city: "上海",
+        },
         experiences: [
           {
             company_name: "ABC公司",
@@ -1014,6 +1035,7 @@ export default {
         organization: "学生会,主席,时间段：2019-2021,经历描述：组织校园活动",
         major_skills: "Python, HTML, CSS, JavaScript",
       },
+      pcTextArr,
       //name
       nameRO: true,
       toolName: false,
@@ -1033,8 +1055,9 @@ export default {
       //city
       cityRO: true,
       toolCity: false,
-      cityoptions: provinceAndCityData,
-      cityselectedOptions: ["12", "120104"],
+      // cityoptions: provinceAndCityData,
+      // cityoptions: pcTextArr,
+      cityselectedOptions: [],
 
       //identity
       identityRO: true,
@@ -1069,8 +1092,9 @@ export default {
 
       work_cityRO: true,
       toolwork_city: false,
-      work_cityoptions: provinceAndCityData,
-      work_cityselectedOptions: ["12", "120104"],
+      // work_cityoptions: provinceAndCityData,
+      // work_cityoptions: pcTextArr,
+      work_cityselectedOptions: [],
 
       other_cityRO: true,
       toolother_city: false,
@@ -1179,7 +1203,16 @@ export default {
   created() {
     this.user = JSON.parse(this.$store.state.user);
     this.Resume = JSON.parse(localStorage.getItem("resume"));
-    // this.Resume.name = "111";
+
+    this.cityselectedOptions = [
+      this.Resume.city.split("/")[0],
+      this.Resume.city.split("/")[1],
+    ];
+
+    this.work_cityselectedOptions = [
+      this.Resume.expectation.work_city.split("/")[0],
+      this.Resume.expectation.work_city.split("/")[1],
+    ];
   },
   methods: {
     sendNewResume() {
@@ -1193,7 +1226,6 @@ export default {
             if (res.status >= 200 && res.status <= 300) {
               if (res.data.resultCode === 1) {
                 this.$message.success("修改成功");
-                console.log(res.data.data.token);
                 //存储resume对象到localstorage
                 this.$store.commit("setResume", this.Resume);
               } else {
@@ -1211,46 +1243,92 @@ export default {
           });
       });
     },
+    changeBasicInfo() {
+      //告诉后端要更改数据库信息
+    },
     changeName() {
       this.nameRO = true;
       this.sendNewResume();
+      this.changeBasicInfo();
     },
     changeBirthdayDate() {
       this.birthday_dateRO = true;
+      this.sendNewResume();
+      this.changeBasicInfo();
     },
     changeGender() {
       this.genderRO = true;
+      this.sendNewResume();
+      this.changeBasicInfo();
     },
     changeGraduationYear() {
       this.graduationYearRO = true;
+      this.sendNewResume();
     },
-    changeCity() {
+    changeCity(value) {
+      console.log(value);
       this.cityRO = true;
-      var loc = "";
-      for (let i = 0; i < this.cityselectedOptions.length; i++) {
-        loc += codeToText[this.cityselectedOptions[i]];
+      let loc = "";
+      for (let i = 0; i < value.length; i++) {
+        loc += value[i];
+        if (i === 0) loc += "/";
       }
-      console.log(loc); //打印区域码所对应的属性值即中文地址
+      console.log("city:" + loc); //打印区域码所对应的属性值即中文地址
+      this.Resume.city = loc;
+      this.sendNewResume();
     },
     changeIdentity() {
       this.identityRO = true;
+      this.sendNewResume();
     },
     changeTel() {
       this.telRO = true;
+      this.sendNewResume();
     },
     changeEmail() {
       this.emailRO = true;
+      this.sendNewResume();
     },
     changeJob_status() {
       this.job_statusRO = true;
+      this.sendNewResume();
     },
-    changepersonal_advantages() {},
-    changeexpected_industry() {},
-    changeexpected_position() {},
-    changeposition_details() {},
-    changesalary_requirements() {},
-    changework_city() {},
-    changeother_city() {},
+    changepersonal_advantages() {
+      this.personal_advantagesRO = true;
+      this.sendNewResume();
+    },
+    changeexpected_industry() {
+      this.expected_industryRO = true;
+      this.sendNewResume();
+    },
+    changeexpected_position() {
+      this.expected_positionRO = true;
+      this.sendNewResume();
+    },
+    changeposition_details() {
+      this.position_detailsRO = true;
+      this.sendNewResume();
+    },
+    changesalary_requirements() {
+      this.salary_requirementsRO = true;
+      this.sendNewResume();
+    },
+    changework_city(value) {
+      console.log(value);
+      this.work_cityRO = true;
+      let loc = "";
+      for (let i = 0; i < value.length; i++) {
+        loc += value[i];
+        if (i === 0) loc += "/";
+      }
+      console.log("work_city:" + loc); //打印区域码所对应的属性值即中文地址
+      this.Resume.expectation.work_city = loc;
+      this.sendNewResume();
+    },
+    changeother_city() {
+      this.other_cityRO = true;
+      this.sendNewResume();
+    },
     addExperience() {
       this.Resume.experiences.push({
         company_name: "",
@@ -1282,13 +1360,8 @@ export default {
     },
     changeexperiences() {
       this.experiencesRO = true;
+      this.sendNewResume();
     },
-    // changecompany_name() {},
-    // changeindustry() {},
-    // changework_time() {},
-    // changeposition_name() {},
-    // changejob_description() {},
-    // changeisInternship() {},
     addProjects() {
       this.Resume.projects.push({
         project_name: "",
@@ -1320,13 +1393,8 @@ export default {
     },
     changeprojects() {
       this.projectsRO = true;
+      this.sendNewResume();
     },
-    // changeproject_name() {},
-    // changerole() {},
-    // changeproject_time() {},
-    // changeproject_description() {},
-    // changeproject_performance() {},
-    // changeproject_link() {},
     addEducations() {
       this.Resume.educations.push({
         university: "",
@@ -1362,9 +1430,13 @@ export default {
     },
     changeeducations() {
       this.educationsRO = true;
+      this.sendNewResume();
     },
 
-    changehonor_name() {},
+    changehonor_name() {
+      this.honor_nameRO = true;
+      this.sendNewResume();
+    },
     addcertificates() {
       this.Resume.certificate.push("");
       this.certificatesTools.push({
@@ -1372,11 +1444,20 @@ export default {
         toolcertificate_name: false,
       });
     },
-    changecertificate_name() {},
+    changecertificate_name() {
+      this.certificatesRO = true;
+      this.sendNewResume();
+    },
 
-    changeorganization() {},
+    changeorganization() {
+      this.organizationRO = true;
+      this.sendNewResume();
+    },
 
-    changemajor_skills() {},
+    changemajor_skills() {
+      this.major_skillsRO = true;
+      this.sendNewResume();
+    },
   },
 };
 </script>
