@@ -1,5 +1,4 @@
 <template>
-  <el-container>
     <el-main>
       <el-row>
         <el-col :span="12">
@@ -27,9 +26,8 @@
           </ul>
         </el-col>
       </el-row>
-      <Pagination :listPageChange="listPageChange" :total="this.total" />
+      <Pagination :listPageChange="listPageChange" :total="this.total" :pageSize="10"/>
     </el-main>
-  </el-container>
 </template>
 
 <script>
@@ -54,13 +52,14 @@ export default {
       window.location.href =
         "http://" + url + "?backurl=" + window.location.href;
     },
-    listPageChange(pageSize) {
+    listPageChange() {
       //传给pagination
       //pagination改变页面
+      //pageSize:10
       let pageNum = this.$store.state.pageNum;
       this.itemsOnShow = this.listNow.slice(
-        (pageNum - 1) * pageSize,
-        pageNum * pageSize
+        (pageNum - 1) * 10,
+        pageNum * 10
       );
     },
   },

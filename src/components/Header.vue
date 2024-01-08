@@ -4,18 +4,19 @@
       <div class="navbar-left">
         <i class="iconfonthome icon-home" @click="toHome"></i>
       </div>
-      <SearchBox v-if="showSearchBox"/>
+      <SearchBox v-if="showSearchBox" />
       <div class="navbar-right">
-        <i class="iconfontstats icon-stats"  @click="toStats"></i>
+        <i class="iconfontstats icon-stats" @click="toStats"></i>
         <i class="iconfont icon-job" @click="toJob"></i>
         <i class="iconfont icon-study" @click="toStudy"></i>
         <i class="iconfonttest icon-test" @click="toTest"></i>
         <authImg
           :imgUrl="avatarSrc"
           :authToken="tokenStr"
-          :ifshowMenu=true
+          :ifshowMenu="true"
           alt="Image"
           @click.native="toPersonalPage"
+          style="margin-right: 50px"
         ></authImg>
       </div>
     </header>
@@ -40,16 +41,20 @@ export default {
   },
   computed: {
     avatarSrc: function () {
-      const prefix = "http://"+this.$store.state.IP+":8080/";
+      const prefix = "http://" + this.$store.state.IP + ":8080/";
       if (!this.avatar) return prefix + "statics/defaultAvatar.jpg";
       return prefix + "Users/" + this.userId + "/avatar/" + this.avatar;
     },
     tokenStr: function () {
       return localStorage.getItem("token");
     },
-    showSearchBox(){
-      return this.$route.path ==="/mainpage/jobs" ||this.$route.path==="/mainpage/study"
-    }
+    showSearchBox() {
+      return (
+        this.$route.path === "/mainpage/jobs" ||
+        this.$route.path === "/mainpage/study" ||
+        this.$route.path.search("/mainpage/lessonVideos") !== -1
+      );
+    },
   },
   methods: {
     toHome() {
@@ -72,7 +77,7 @@ export default {
         path: "/mainpage/study",
       });
     },
-    toTest(){
+    toTest() {
       this.$router.push({
         path: "/mainpage/test",
       });
@@ -203,7 +208,7 @@ header {
   height: 3pc; /*header高度 */
   display: flex;
   align-items: center;
-  padding-left: 0%; /* 字体左边距 */
+  padding-left: 5%; /* 字体左边距 */
   padding-bottom: 0pt;
   padding-right: 0%;
   padding-top: 0pt;
@@ -211,7 +216,7 @@ header {
   /* position: sticky; */
   position: fixed;
   top: 0;
-  width: 90%;
+  width: 100%;
   z-index: 100; /*可以调整z-index，确保导航栏在其他元素之上*/
   box-shadow: 0pt 0.052083333in 11.25pt -5.25pt rgba(0, 0, 0, 0.1);
 }

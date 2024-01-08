@@ -8,6 +8,7 @@ import JobDetail from '../components/JobDetail.vue';
 import StatsPage from '../pages/StatsPage.vue';
 import PersonalPage from "../pages/PersonalPage.vue";
 import TestPage from "../pages/TestPage.vue";
+import VideoList from "../pages/VideoList.vue";
 
 const routes = [
     {
@@ -51,6 +52,13 @@ const routes = [
                 path:'test',
                 components:{
                     Display:TestPage
+                }
+            },
+            {
+                path:'lessonVideos/:type',
+                name:'lessonVideos',
+                components:{
+                    Display:VideoList
                 }
             },
         ],

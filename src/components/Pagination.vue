@@ -14,13 +14,14 @@ export default {
   name: "PagiNation",
   data() {
     return {
-      tablePage: {
-        //pageNum: 1, // 第几页
-        pageSize: 10, // 每页多少条
-      },
     };
   },
   props: {
+    pageSize:{
+      type:Number,
+      require:true,
+      default:10,
+    },
     listPageChange: {
       //父组件JobList的换页方法
       type: Function,
@@ -32,7 +33,7 @@ export default {
   methods: {
     handlePageChange(currentPage) {
       this.$store.commit("setPageNum", currentPage); // 在此刷新数据
-      this.listPageChange(this.tablePage.pageSize);
+      this.listPageChange(this.pageSize);
       // 滚动到页面顶部
       window.scrollTo({
         top: 0,
