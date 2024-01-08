@@ -87,7 +87,7 @@
     <pagination
       :listPageChange="listPageChange"
       :total="this.totalonshow"
-      :pageSize="60"
+      :pageSize=60
     />
   </el-main>
 </template>

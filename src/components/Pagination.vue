@@ -4,6 +4,7 @@
       layout=" prev, pager, next"
       :current-page="this.$store.state.pageNum"
       :total="this.total"
+      :page-size="this.pageSize"
       @current-change="handlePageChange"
     />
   </div>
