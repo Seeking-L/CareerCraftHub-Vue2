@@ -87,7 +87,7 @@
     <pagination
       :listPageChange="listPageChange"
       :total="this.totalonshow"
-      :pageSize=60
+      :pageSize=40
     />
   </el-main>
 </template>
@@ -156,7 +156,7 @@ export default {
         return this.$store.state.pageNum
     },
     // listAfterSearchAndPaginate(){
-    //     return this.listAfterSearchAndPaginate.slice((this.pageNum - 1) * 60, this.pageNum * 60);
+    //     return this.listAfterSearchAndPaginate.slice((this.pageNum - 1) * 40, this.pageNum * 40);
     // }
   },
   mounted() {
@@ -172,7 +172,7 @@ export default {
             this.$store.commit("setPageNum", 1)
             this.allvideos = res.data.data;
             this.listAfterSearch=res.data.data;
-            this.listAfterSearchAndPaginate=this.listAfterSearch.slice(0,60)
+            this.listAfterSearchAndPaginate=this.listAfterSearch.slice(0,40)
           } else {
             this.$message.error(res.data.message);
           }
@@ -196,7 +196,7 @@ export default {
           return item.name.includes(str);
         });
         this.listAfterSearch=templist;
-        this.listAfterSearchAndPaginate=this.listAfterSearch.slice(0,60);
+        this.listAfterSearchAndPaginate=this.listAfterSearch.slice(0,40);
         this.$store.commit("setPageNum", 1);
       },
     },
@@ -210,9 +210,9 @@ export default {
     listPageChange() {
       //传给pagination
       //pagination改变页面
-      //pageSize:60
+      //pageSize:40
       let pageNum = this.$store.state.pageNum;
-      this.listAfterSearchAndPaginate = this.allvideos.slice((pageNum - 1) * 60, pageNum * 60);
+      this.listAfterSearchAndPaginate = this.allvideos.slice((pageNum - 1) * 40, pageNum * 40);
     },
   },
 };
