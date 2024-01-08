@@ -7,23 +7,19 @@
   >
     <h3>基本信息</h3>
     <el-form-item
-      label="昵称"
-      @mouseover.native="toolNickName = true"
-      @mouseout.native="toolNickName = false"
+      label="姓名"
+      @mouseover.native="toolName = true"
+      @mouseout.native="toolName = false"
     >
       <el-col :span="5">
         <el-input
           v-model="Resume.name"
-          :readonly="nicknameRO"
-          @change="changeNickName"
+          :readonly="nameRO"
+          @change="changeName"
         ></el-input>
       </el-col>
       <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolNickName"
-          @click="nicknameRO = false"
-        ></i>
+        <i class="el-icon-edit" v-show="toolName" @click="nameRO = false"></i>
       </el-col>
       <el-col :span="16"> </el-col>
     </el-form-item>
@@ -102,7 +98,7 @@
       <el-col :span="5">
         <el-cascader
           size="large"
-          :options="cityoptions"
+          :options="pcTextArr"
           v-model="cityselectedOptions"
           :disabled="cityRO"
           @change="changeCity"
@@ -205,8 +201,10 @@
       @mouseover.native="toolpersonal_advantages = true"
       @mouseout.native="toolpersonal_advantages = false"
     >
-      <el-col :span="5">
+      <el-col :span="8">
         <el-input
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 10 }"
           v-model="Resume.personal_advantages"
           :readonly="personal_advantagesRO"
           @change="changepersonal_advantages"
@@ -219,7 +217,7 @@
           @click="personal_advantagesRO = false"
         ></i>
       </el-col>
-      <el-col :span="16"> </el-col>
+      <el-col :span="13"> </el-col>
     </el-form-item>
     <h3>期望岗位</h3>
     <el-form-item
@@ -269,7 +267,7 @@
       @mouseover.native="toolposition_details = true"
       @mouseout.native="toolposition_details = false"
     >
-      <el-col :span="5">
+      <el-col :span="10">
         <el-input
           v-model="Resume.position_details"
           :readonly="position_detailsRO"
@@ -283,7 +281,7 @@
           @click="position_detailsRO = false"
         ></i>
       </el-col>
-      <el-col :span="16"> </el-col>
+      <el-col :span="11"> </el-col>
     </el-form-item>
     <el-form-item
       label="期望薪资"
@@ -314,7 +312,7 @@
       <el-col :span="5">
         <el-cascader
           size="large"
-          :options="work_cityoptions"
+          :options="pcTextArr"
           v-model="work_cityselectedOptions"
           :disabled="work_cityRO"
           @change="changework_city"
@@ -335,7 +333,7 @@
       @mouseover.native="toolother_city = true"
       @mouseout.native="toolother_city = false"
     >
-      <el-col :span="5">
+      <el-col :span="10">
         <el-input
           v-model="Resume.other_city"
           :readonly="other_cityRO"
@@ -349,7 +347,7 @@
           @click="other_cityRO = false"
         ></i>
       </el-col>
-      <el-col :span="16"> </el-col>
+      <el-col :span="11"> </el-col>
     </el-form-item>
     <el-row
       @mouseover.native="toolexperiences = true"
@@ -368,13 +366,18 @@
       <el-col :span="17"> </el-col>
     </el-row>
     <ul>
-      <el-form v-for="(experience, index) in Resume.experiences" :key="index">
+      <el-form
+        v-for="(experience, index) in Resume.experiences"
+        :key="index"
+        label-width="100px"
+        style="margin-left: -40px"
+      >
         <el-form-item
           label="公司名称"
           @mouseover.native="experienceTools[index].toolcompany_name = true"
           @mouseout.native="experienceTools[index].toolcompany_name = false"
         >
-          <el-col :span="5">
+          <el-col :span="8">
             <el-input
               v-model="experience.company_name"
               :readonly="experiencesRO"
@@ -388,7 +391,7 @@
               @click="experiencesRO = false"
             ></i>
           </el-col>
-          <el-col :span="16"> </el-col>
+          <el-col :span="13"> </el-col>
         </el-form-item>
         <el-form-item
           label="行业"
@@ -458,8 +461,10 @@
           @mouseover.native="experienceTools[index].tooljob_description = true"
           @mouseout.native="experienceTools[index].tooljob_description = false"
         >
-          <el-col :span="5">
+          <el-col :span="10">
             <el-input
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
               v-model="experience.job_description"
               :readonly="experiencesRO"
               @change="changeexperiences"
@@ -472,7 +477,7 @@
               @click="experiencesRO = false"
             ></i>
           </el-col>
-          <el-col :span="16"> </el-col>
+          <el-col :span="11"> </el-col>
         </el-form-item>
         <el-form-item
           label="是否为实习"
@@ -498,12 +503,478 @@
         <hr />
       </el-form>
     </ul>
+    <el-row
+      @mouseover.native="toolprojects = true"
+      @mouseout.native="toolprojects = false"
+    >
+      <el-col :span="4">
+        <h3>项目经历</h3>
+      </el-col>
+      <el-col :span="3">
+        <i
+          class="el-icon-circle-plus-outline"
+          v-show="toolprojects"
+          @click="addProjects"
+        ></i>
+      </el-col>
+      <el-col :span="17"> </el-col>
+    </el-row>
+    <ul>
+      <el-form
+        v-for="(project, index) in Resume.projects"
+        :key="index"
+        label-width="100px"
+        style="margin-left: -40px"
+      >
+        <el-form-item
+          label="项目名称"
+          @mouseover.native="projectsTools[index].toolproject_name = true"
+          @mouseout.native="projectsTools[index].toolproject_name = false"
+        >
+          <el-col :span="8">
+            <el-input
+              v-model="project.project_name"
+              :readonly="projectsRO"
+              @change="changeprojects"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="projectsTools[index].toolproject_name"
+              @click="projectsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="13"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="角色"
+          @mouseover.native="projectsTools[index].toolrole = true"
+          @mouseout.native="projectsTools[index].toolrole = false"
+        >
+          <el-col :span="5">
+            <el-input
+              v-model="project.role"
+              :readonly="projectsRO"
+              @change="changeprojects"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="projectsTools[index].toolrole"
+              @click="projectsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="16"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="项目时间"
+          @mouseover.native="projectsTools[index].toolproject_time = true"
+          @mouseout.native="projectsTools[index].toolproject_time = false"
+        >
+          <el-col :span="5">
+            <el-input
+              v-model="project.project_time"
+              :readonly="projectsRO"
+              @change="changeprojects"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="projectsTools[index].toolproject_time"
+              @click="projectsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="16"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="项目描述"
+          @mouseover.native="
+            projectsTools[index].toolproject_description = true
+          "
+          @mouseout.native="
+            projectsTools[index].toolproject_description = false
+          "
+        >
+          <el-col :span="10">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
+              v-model="project.project_description"
+              :readonly="projectsRO"
+              @change="changeprojects"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="projectsTools[index].toolproject_description"
+              @click="projectsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="11"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="项目业绩"
+          @mouseover.native="
+            projectsTools[index].toolproject_performance = true
+          "
+          @mouseout.native="
+            projectsTools[index].toolproject_performance = false
+          "
+        >
+          <el-col :span="10">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
+              v-model="project.project_performance"
+              :readonly="projectsRO"
+              @change="changeprojects"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="projectsTools[index].toolproject_performance"
+              @click="projectsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="11"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="项目链接"
+          @mouseover.native="projectsTools[index].toolproject_link = true"
+          @mouseout.native="projectsTools[index].toolproject_link = false"
+        >
+          <el-col :span="10">
+            <el-input
+              v-model="project.project_link"
+              :readonly="projectsRO"
+              @change="changeprojects"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="projectsTools[index].toolproject_link"
+              @click="projectsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="11"> </el-col>
+        </el-form-item>
+        <hr />
+      </el-form>
+    </ul>
+    <el-row
+      @mouseover.native="tooleducations = true"
+      @mouseout.native="tooleducations = false"
+    >
+      <el-col :span="4">
+        <h3>教育经历</h3>
+      </el-col>
+      <el-col :span="3">
+        <i
+          class="el-icon-circle-plus-outline"
+          v-show="tooleducations"
+          @click="addEducations"
+        ></i>
+      </el-col>
+      <el-col :span="17"> </el-col>
+    </el-row>
+    <ul>
+      <el-form
+        v-for="(education, index) in Resume.educations"
+        :key="index"
+        label-width="100px"
+        style="margin-left: -40px"
+      >
+        <el-form-item
+          label="学校名称"
+          @mouseover.native="educationsTools[index].tooluniversity = true"
+          @mouseout.native="educationsTools[index].tooluniversity = false"
+        >
+          <el-col :span="5">
+            <el-input
+              v-model="education.university"
+              :readonly="educationsRO"
+              @change="changeeducations"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="educationsTools[index].tooluniversity"
+              @click="educationsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="16"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="学历"
+          @mouseover.native="educationsTools[index].toolqualification = true"
+          @mouseout.native="educationsTools[index].toolqualification = false"
+        >
+          <el-col :span="5">
+            <el-input
+              v-model="education.qualification"
+              :readonly="educationsRO"
+              @change="changeeducations"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="educationsTools[index].toolqualification"
+              @click="educationsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="16"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="专业"
+          @mouseover.native="educationsTools[index].toolmajor = true"
+          @mouseout.native="educationsTools[index].toolmajor = false"
+        >
+          <el-col :span="5">
+            <el-input
+              v-model="education.major"
+              :readonly="educationsRO"
+              @change="changeeducations"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="educationsTools[index].toolmajor"
+              @click="educationsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="16"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="时间段"
+          @mouseover.native="educationsTools[index].toolstudy_time = true"
+          @mouseout.native="educationsTools[index].toolstudy_time = false"
+        >
+          <el-col :span="5">
+            <el-input
+              v-model="education.study_time"
+              :readonly="educationsRO"
+              @change="changeeducations"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="educationsTools[index].toolstudy_time"
+              @click="educationsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="16"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="主修课程"
+          @mouseover.native="educationsTools[index].toolmajor_courses = true"
+          @mouseout.native="educationsTools[index].toolmajor_courses = false"
+        >
+          <el-col :span="10">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
+              v-model="education.major_courses"
+              :readonly="educationsRO"
+              @change="changeeducations"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="educationsTools[index].toolmajor_courses"
+              @click="educationsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="11"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="专业排名"
+          @mouseover.native="educationsTools[index].toolprofession_rank = true"
+          @mouseout.native="educationsTools[index].toolprofession_rank = false"
+        >
+          <el-col :span="5">
+            <el-input
+              v-model="education.profession_rank"
+              :readonly="educationsRO"
+              @change="changeeducations"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="educationsTools[index].toolprofession_rank"
+              @click="educationsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="16"> </el-col>
+        </el-form-item>
+        <el-form-item
+          label="在校经历"
+          @mouseover.native="educationsTools[index].toolstudy_experience = true"
+          @mouseout.native="educationsTools[index].toolstudy_experience = false"
+        >
+          <el-col :span="10">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 10 }"
+              v-model="education.study_experience"
+              :readonly="educationsRO"
+              @change="changeeducations"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="educationsTools[index].toolstudy_experience"
+              @click="educationsRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="11"> </el-col>
+        </el-form-item>
+        <hr />
+      </el-form>
+    </ul>
+    <el-form-item
+      label="所获荣誉"
+      @mouseover.native="toolhonor_name = true"
+      @mouseout.native="toolhonor_name = false"
+    >
+      <el-col :span="10">
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 10 }"
+          v-model="Resume.honor_name"
+          :readonly="honor_nameRO"
+          @change="changehonor_name"
+        ></el-input>
+      </el-col>
+      <el-col :span="3">
+        <i
+          class="el-icon-edit"
+          v-show="toolhonor_name"
+          @click="honor_nameRO = false"
+        ></i>
+      </el-col>
+      <el-col :span="11"> </el-col>
+    </el-form-item>
+    <el-row
+      @mouseover.native="toolcertificates = true"
+      @mouseout.native="toolcertificates = false"
+    >
+      <el-col :span="4">
+        <h3>资格证书</h3>
+      </el-col>
+      <el-col :span="3">
+        <i
+          class="el-icon-circle-plus-outline"
+          v-show="toolcertificates"
+          @click="addcertificates"
+        ></i>
+      </el-col>
+      <el-col :span="17"> </el-col>
+    </el-row>
+    <ul>
+      <el-form
+        v-for="(certificate_name, index) in Resume.certificate"
+        :key="index"
+        style="margin-left: -40px"
+      >
+        <el-form-item
+          label="证书"
+          @mouseover.native="
+            certificatesTools[index].toolcertificate_name = true
+          "
+          @mouseout.native="
+            certificatesTools[index].toolcertificate_name = false
+          "
+          label-width="100px"
+        >
+          <el-col :span="10">
+            <el-input
+              v-model="Resume.certificate[index]"
+              :readonly="certificatesRO"
+              @change="changecertificate_name"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <i
+              class="el-icon-edit"
+              v-show="certificatesTools[index].toolcertificate_name"
+              @click="certificatesRO = false"
+            ></i>
+          </el-col>
+          <el-col :span="11"> </el-col>
+        </el-form-item>
+      </el-form>
+      <hr style="margin-left: -40px" />
+    </ul>
+    <el-form-item
+      label="课余经历"
+      @mouseover.native="toolorganization = true"
+      @mouseout.native="toolorganization = false"
+    >
+      <el-col :span="12">
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 20 }"
+          v-model="Resume.organization"
+          :readonly="organizationRO"
+          @change="changeorganization"
+        ></el-input>
+      </el-col>
+      <el-col :span="3">
+        <i
+          class="el-icon-edit"
+          v-show="toolorganization"
+          @click="organizationRO = false"
+        ></i>
+      </el-col>
+      <el-col :span="11"> </el-col>
+    </el-form-item>
+    <el-form-item
+      label="专业技能"
+      @mouseover.native="toolmajor_skills = true"
+      @mouseout.native="toolmajor_skills = false"
+    >
+      <el-col :span="15">
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 20 }"
+          v-model="Resume.major_skills"
+          :readonly="major_skillsRO"
+          @change="changemajor_skills"
+        ></el-input>
+      </el-col>
+      <el-col :span="3">
+        <i
+          class="el-icon-edit"
+          v-show="toolmajor_skills"
+          @click="major_skillsRO = false"
+        ></i>
+      </el-col>
+      <el-col :span="6"> </el-col>
+    </el-form-item>
   </el-form>
 </template>
 
 <script>
-import { provinceAndCityData, codeToText } from "element-china-area-data";
-
+import {
+  // provinceAndCityData,
+  // codeToText,
+  // TextToCode,
+  pcTextArr,
+} from "element-china-area-data";
+import http from "../util/request";
 export default {
   name: "ResumeComponent",
   data() {
@@ -516,16 +987,18 @@ export default {
         graduation_year: "2022",
         tel: "123456789",
         birthday_date: "2000-01-01",
-        city: "某地",
+        city: "北京市/朝阳区",
         email: "zhangsan@example.com",
         job_status: "考虑机会",
         personal_advantages: "沟通能力强，团队协作",
-        expected_industry: "IT",
-        expected_position: "软件工程师",
-        position_details: "Web开发",
-        salary_requirements: "15000元/月",
-        work_city: "北京",
-        other_city: "上海",
+        expectation: {
+          expected_industry: "IT",
+          expected_position: "软件工程师",
+          position_details: "Web开发",
+          salary_requirements: "15000元/月",
+          work_city: "北京市/朝阳区",
+          other_city: "上海",
+        },
         experiences: [
           {
             company_name: "ABC公司",
@@ -545,19 +1018,11 @@ export default {
             project_performance: "成功上线",
             project_link: "http://projecta.com",
           },
-          {
-            project_name: "项目B",
-            role: "开发工程师",
-            project_time: "2022 - 2023",
-            project_description: "设计和实施数据库系统",
-            project_performance: "提高系统性能",
-            project_link: "http://projectb.com",
-          },
         ],
         educations: [
           {
             university: "某大学",
-            education: "本科",
+            qualification: "本科",
             major: "计算机科学与技术",
             study_time: "时间段：2018-2022",
             major_courses: "数据结构，算法",
@@ -566,16 +1031,14 @@ export default {
           },
         ],
         honor_name: "优秀学生奖",
-        certificate_name: "计算机专业证书",
-        organization_name: "学生会",
-        organization_role: "主席",
-        organization_time: "时间段：2019-2021",
-        experience_description: "经历描述：组织校园活动",
+        certificate: ["计算机专业证书"],
+        organization: "学生会,主席,时间段：2019-2021,经历描述：组织校园活动",
         major_skills: "Python, HTML, CSS, JavaScript",
       },
+      pcTextArr,
       //name
-      nicknameRO: true,
-      toolNickName: false,
+      nameRO: true,
+      toolName: false,
 
       //birthday
       birthday_dateRO: true,
@@ -592,8 +1055,9 @@ export default {
       //city
       cityRO: true,
       toolCity: false,
-      cityoptions: provinceAndCityData,
-      cityselectedOptions: ["12", "120104"],
+      // cityoptions: provinceAndCityData,
+      // cityoptions: pcTextArr,
+      cityselectedOptions: [],
 
       //identity
       identityRO: true,
@@ -628,8 +1092,9 @@ export default {
 
       work_cityRO: true,
       toolwork_city: false,
-      work_cityoptions: provinceAndCityData,
-      work_cityselectedOptions: ["12", "120104"],
+      // work_cityoptions: provinceAndCityData,
+      // work_cityoptions: pcTextArr,
+      work_cityselectedOptions: [],
 
       other_cityRO: true,
       toolother_city: false,
@@ -659,63 +1124,70 @@ export default {
         },
       ],
       //project
-      project_nameRO: true,
-      toolproject_name: false,
+      projectsRO: true,
+      toolprojects: false,
+      projectsTools: [
+        {
+          project_nameRO: true,
+          toolproject_name: false,
 
-      roleRO: true,
-      toolrole: false,
+          roleRO: true,
+          toolrole: false,
 
-      project_timeRO: true,
-      toolproject_time: false,
+          project_timeRO: true,
+          toolproject_time: false,
 
-      project_descriptionRO: true,
-      toolproject_description: false,
+          project_descriptionRO: true,
+          toolproject_description: false,
 
-      project_performanceRO: true,
-      toolproject_performance: false,
+          project_performanceRO: true,
+          toolproject_performance: false,
 
-      project_linkRO: true,
-      toolproject_link: false,
-
+          project_linkRO: true,
+          toolproject_link: false,
+        },
+      ],
       //学历信息
-      universityRO: true,
-      tooluniversity: false,
+      educationsRO: true,
+      tooleducations: false,
+      educationsTools: [
+        {
+          universityRO: true,
+          tooluniversity: false,
 
-      educationRO: true,
-      tooleducation: false,
+          qualificationRO: true,
+          toolqualification: false,
 
-      majorRO: true,
-      toolmajor: false,
+          majorRO: true,
+          toolmajor: false,
 
-      study_timeRO: true,
-      toolstudy_time: false,
+          study_timeRO: true,
+          toolstudy_time: false,
 
-      major_coursesRO: true,
-      toolmajor_courses: false,
+          major_coursesRO: true,
+          toolmajor_courses: false,
 
-      profession_rankRO: true,
-      toolprofession_rank: false,
+          profession_rankRO: true,
+          toolprofession_rank: false,
 
-      study_experienceRO: true,
-      toolstudy_experience: false,
-
+          study_experienceRO: true,
+          toolstudy_experience: false,
+        },
+      ],
       honor_nameRO: true,
       toolhonor_name: false,
 
-      certificate_nameRO: true,
-      toolcertificate_name: false,
+      certificatesRO: true,
+      toolcertificates: false,
+      certificatesTools: [
+        {
+          certificate_nameRO: true,
+          toolcertificate_name: false,
+        },
+      ],
 
-      organization_nameRO: true,
-      toolorganization_name: false,
-
-      organization_roleRO: true,
-      toolorganization_role: false,
-
-      organization_timeRO: true,
-      toolorganization_time: false,
-
-      experience_descriptionRO: true,
-      toolexperience_description: false,
+      organizationRO: true,
+      toolorganization: false,
 
       major_skillsRO: true,
       toolmajor_skills: false,
@@ -730,46 +1202,133 @@ export default {
   },
   created() {
     this.user = JSON.parse(this.$store.state.user);
-    // this.Resume=JSON.parse(localStorage.getItem("Resume"))
-    this.Resume.name = "111";
+    this.Resume = JSON.parse(localStorage.getItem("resume"));
+
+    this.cityselectedOptions = [
+      this.Resume.city.split("/")[0],
+      this.Resume.city.split("/")[1],
+    ];
+
+    this.work_cityselectedOptions = [
+      this.Resume.expectation.work_city.split("/")[0],
+      this.Resume.expectation.work_city.split("/")[1],
+    ];
   },
   methods: {
-    changeNickName() {
-      this.nicknameRO = true;
+    sendNewResume() {
+      this.$refs.Resume.validate(async (valid) => {
+        // async异步和await配套
+        if (!valid) return false;
+        // 发起请求，拿到服务器返回的数据
+        http
+          .post("/updateResume", this.Resume)
+          .then((res) => {
+            if (res.status >= 200 && res.status <= 300) {
+              if (res.data.resultCode === 1) {
+                this.$message.success("修改成功");
+                //存储resume对象到localstorage
+                this.$store.commit("setResume", this.Resume);
+              } else {
+                this.$message.warning(res.data.message);
+              }
+            } else {
+              this.$message.error("error");
+              console.log(res.error);
+            }
+          })
+          .catch((error) => {
+            // 处理错误情况
+            this.$message.error("error");
+            console.log(error);
+          });
+      });
+    },
+    changeBasicInfo() {
+      //告诉后端要更改数据库信息
+    },
+    changeName() {
+      this.nameRO = true;
+      this.sendNewResume();
+      this.changeBasicInfo();
     },
     changeBirthdayDate() {
       this.birthday_dateRO = true;
+      this.sendNewResume();
+      this.changeBasicInfo();
     },
     changeGender() {
       this.genderRO = true;
+      this.sendNewResume();
+      this.changeBasicInfo();
     },
     changeGraduationYear() {
       this.graduationYearRO = true;
+      this.sendNewResume();
     },
-    changeCity() {
+    changeCity(value) {
+      console.log(value);
       this.cityRO = true;
-      var loc = "";
-      for (let i = 0; i < this.cityselectedOptions.length; i++) {
-        loc += codeToText[this.cityselectedOptions[i]];
+      let loc = "";
+      for (let i = 0; i < value.length; i++) {
+        loc += value[i];
+        if (i === 0) loc += "/";
       }
-      console.log(loc); //打印区域码所对应的属性值即中文地址
+      console.log("city:" + loc); //打印区域码所对应的属性值即中文地址
+      this.Resume.city = loc;
+      this.sendNewResume();
     },
     changeIdentity() {
       this.identityRO = true;
+      this.sendNewResume();
     },
     changeTel() {
       this.telRO = true;
+      this.sendNewResume();
     },
     changeEmail() {
       this.emailRO = true;
+      this.sendNewResume();
     },
-    changepersonal_advantages() {},
-    changeexpected_industry() {},
-    changeexpected_position() {},
-    changeposition_details() {},
-    changesalary_requirements() {},
-    changework_city() {},
-    changeother_city() {},
+    changeJob_status() {
+      this.job_statusRO = true;
+      this.sendNewResume();
+    },
+    changepersonal_advantages() {
+      this.personal_advantagesRO = true;
+      this.sendNewResume();
+    },
+    changeexpected_industry() {
+      this.expected_industryRO = true;
+      this.sendNewResume();
+    },
+    changeexpected_position() {
+      this.expected_positionRO = true;
+      this.sendNewResume();
+    },
+    changeposition_details() {
+      this.position_detailsRO = true;
+      this.sendNewResume();
+    },
+    changesalary_requirements() {
+      this.salary_requirementsRO = true;
+      this.sendNewResume();
+    },
+    changework_city(value) {
+      console.log(value);
+      this.work_cityRO = true;
+      let loc = "";
+      for (let i = 0; i < value.length; i++) {
+        loc += value[i];
+        if (i === 0) loc += "/";
+      }
+      console.log("work_city:" + loc); //打印区域码所对应的属性值即中文地址
+      this.Resume.expectation.work_city = loc;
+      this.sendNewResume();
+    },
+    changeother_city() {
+      this.other_cityRO = true;
+      this.sendNewResume();
+    },
     addExperience() {
       this.Resume.experiences.push({
         company_name: "",
@@ -801,35 +1360,104 @@ export default {
     },
     changeexperiences() {
       this.experiencesRO = true;
+      this.sendNewResume();
     },
-    changecompany_name() {},
-    changeindustry() {},
-    changework_time() {},
-    changeposition_name() {},
-    changejob_description() {},
-    changeisInternship() {},
-    changeprojects() {},
-    changeproject_name() {},
-    changerole() {},
-    changeproject_time() {},
-    changeproject_description() {},
-    changeproject_performance() {},
-    changeproject_link() {},
-    changeeducations() {},
-    changeuniversity() {},
-    changeeducation() {},
-    changemajor() {},
-    changestudy_time() {},
-    changemajor_courses() {},
-    changeprofession_rank() {},
-    changestudy_experience() {},
-    changehonor_name() {},
-    changecertificate_name() {},
-    changeorganization_name() {},
-    changeorganization_role() {},
-    changeorganization_time() {},
-    changeexperience_description() {},
-    changemajor_skills() {},
+    addProjects() {
+      this.Resume.projects.push({
+        project_name: "",
+        role: "",
+        project_time: "",
+        project_description: "",
+        project_performance: "",
+        project_link: "",
+      });
+      this.projectsTools.push({
+        project_nameRO: true,
+        toolproject_name: false,
+
+        roleRO: true,
+        toolrole: false,
+
+        project_timeRO: true,
+        toolproject_time: false,
+
+        project_descriptionRO: true,
+        toolproject_description: false,
+
+        project_performanceRO: true,
+        toolproject_performance: false,
+
+        project_linkRO: true,
+        toolproject_link: false,
+      });
+    },
+    changeprojects() {
+      this.projectsRO = true;
+      this.sendNewResume();
+    },
+    addEducations() {
+      this.Resume.educations.push({
+        university: "",
+        qualification: "",
+        major: "",
+        study_time: "",
+        major_courses: "",
+        profession_rank: "",
+        study_experience: "",
+      });
+      this.educationsTools.push({
+        universityRO: true,
+        tooluniversity: false,
+
+        qualificationRO: true,
+        toolqualification: false,
+
+        majorRO: true,
+        toolmajor: false,
+
+        study_timeRO: true,
+        toolstudy_time: false,
+
+        major_coursesRO: true,
+        toolmajor_courses: false,
+
+        profession_rankRO: true,
+        toolprofession_rank: false,
+
+        study_experienceRO: true,
+        toolstudy_experience: false,
+      });
+    },
+    changeeducations() {
+      this.educationsRO = true;
+      this.sendNewResume();
+    },
+
+    changehonor_name() {
+      this.honor_nameRO = true;
+      this.sendNewResume();
+    },
+    addcertificates() {
+      this.Resume.certificate.push("");
+      this.certificatesTools.push({
+        certificate_nameRO: true,
+        toolcertificate_name: false,
+      });
+    },
+    changecertificate_name() {
+      this.certificatesRO = true;
+      this.sendNewResume();
+    },
+
+    changeorganization() {
+      this.organizationRO = true;
+      this.sendNewResume();
+    },
+
+    changemajor_skills() {
+      this.major_skillsRO = true;
+      this.sendNewResume();
+    },
   },
 };
 </script>

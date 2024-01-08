@@ -31,7 +31,7 @@ export default {
   computed: {
     avatarSrc: function () {
       const prefix = "http://"+this.$store.state.IP+":8080/";
-      if (!this.avatar) return prefix + "statics/headpicture.jpg";
+      if (!this.avatar) return prefix + "statics/defaultAvatar.jpg";
       return prefix + "Users/" + this.user.userId + "/avatar/" + this.avatar;
     },
     tokenStr:function(){
