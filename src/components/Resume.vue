@@ -1,970 +1,988 @@
 <template>
-  <el-form
-    ref="Resume"
-    :model="Resume"
-    label-width="80px"
-    label-position="left"
-  >
-    <h3>基本信息</h3>
-    <el-form-item
-      label="姓名"
-      @mouseover.native="toolName = true"
-      @mouseout.native="toolName = false"
+  <div>
+    <el-form
+      ref="Resume"
+      :model="Resume"
+      label-width="80px"
+      label-position="left"
     >
-      <el-col :span="5">
-        <el-input
-          v-model="Resume.name"
-          :readonly="nameRO"
-          @change="changeName"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i class="el-icon-edit" v-show="toolName" @click="nameRO = false"></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="出生日期"
-      @mouseover.native="toolbirth = true"
-      @mouseout.native="toolbirth = false"
-    >
-      <el-col :span="5">
-        <el-input
-          v-model="Resume.birthday_date"
-          :readonly="birthday_dateRO"
-          @change="changeBirthdayDate"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolbirth"
-          @click="birthday_dateRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="性别"
-      @mouseover.native="toolGender = true"
-      @mouseout.native="toolGender = false"
-    >
-      <el-col :span="5">
-        <el-select
-          v-model="Resume.gender"
-          placeholder="选择性别"
-          :disabled="genderRO"
-          @change="changeGender"
-        >
-          <el-option label="男" value="male"></el-option>
-          <el-option label="女" value="female"></el-option>
-        </el-select>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolGender"
-          @click="genderRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="毕业年份"
-      @mouseover.native="toolGraduationYear = true"
-      @mouseout.native="toolGraduationYear = false"
-    >
-      <el-col :span="5">
-        <el-input
-          v-model="Resume.graduation_year"
-          :readonly="graduationYearRO"
-          @change="changeGraduationYear"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolGraduationYear"
-          @click="graduationYearRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="城市"
-      @mouseover.native="toolCity = true"
-      @mouseout.native="toolCity = false"
-    >
-      <el-col :span="5">
-        <el-cascader
-          size="large"
-          :options="pcTextArr"
-          v-model="cityselectedOptions"
-          :disabled="cityRO"
-          @change="changeCity"
-        >
-        </el-cascader>
-      </el-col>
-      <el-col :span="3">
-        <i class="el-icon-edit" v-show="toolCity" @click="cityRO = false"></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="身份"
-      @mouseover.native="toolIdentity = true"
-      @mouseout.native="toolIdentity = false"
-    >
-      <el-col :span="5">
-        <el-select
-          v-model="Resume.identity"
-          placeholder="选择身份"
-          :disabled="identityRO"
-          @change="changeIdentity"
-        >
-          <el-option label="学生" value="学生"></el-option>
-          <el-option label="职场人" value="职场人"></el-option>
-        </el-select>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolIdentity"
-          @click="identityRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="手机号"
-      @mouseover.native="toolTel = true"
-      @mouseout.native="toolTel = false"
-    >
-      <el-col :span="5">
-        <el-input
-          v-model="Resume.tel"
-          :readonly="telRO"
-          @change="changeTel"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i class="el-icon-edit" v-show="toolTel" @click="telRO = false"></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="邮箱"
-      @mouseover.native="toolEmail = true"
-      @mouseout.native="toolEmail = false"
-    >
-      <el-col :span="5">
-        <el-input
-          v-model="Resume.email"
-          :readonly="emailRO"
-          @change="changeEmail"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i class="el-icon-edit" v-show="toolEmail" @click="emailRO = false"></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="求职状态"
-      @mouseover.native="toolJob_status = true"
-      @mouseout.native="toolJob_status = false"
-    >
-      <el-col :span="5">
-        <el-select
-          v-model="Resume.job_status"
-          placeholder="选择状态"
-          :disabled="job_statusRO"
-          @change="changeJob_status"
-        >
-          <el-option label="随时到岗" value="随时到岗"></el-option>
-          <el-option label="月内到岗" value="月内到岗"></el-option>
-          <el-option label="考虑机会" value="考虑机会"></el-option>
-          <el-option label="暂不考虑" value="暂不考虑"></el-option>
-        </el-select>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolJob_status"
-          @click="job_statusRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="个人优势"
-      @mouseover.native="toolpersonal_advantages = true"
-      @mouseout.native="toolpersonal_advantages = false"
-    >
-      <el-col :span="8">
-        <el-input
-          type="textarea"
-          :autosize="{ minRows: 3, maxRows: 10 }"
-          v-model="Resume.personal_advantages"
-          :readonly="personal_advantagesRO"
-          @change="changepersonal_advantages"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolpersonal_advantages"
-          @click="personal_advantagesRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="13"> </el-col>
-    </el-form-item>
-    <h3>期望岗位</h3>
-    <el-form-item
-      label="期望行业"
-      @mouseover.native="toolexpected_industry = true"
-      @mouseout.native="toolexpected_industry = false"
-    >
-      <el-col :span="5">
-        <el-input
-          v-model="Resume.expected_industry"
-          :readonly="expected_industryRO"
-          @change="changeexpected_industry"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolexpected_industry"
-          @click="expected_industryRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="期望职位"
-      @mouseover.native="toolexpected_position = true"
-      @mouseout.native="toolexpected_position = false"
-    >
-      <el-col :span="5">
-        <el-input
-          v-model="Resume.expected_position"
-          :readonly="expected_positionRO"
-          @change="changeexpected_position"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolexpected_position"
-          @click="expected_positionRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="职位详情"
-      @mouseover.native="toolposition_details = true"
-      @mouseout.native="toolposition_details = false"
-    >
-      <el-col :span="10">
-        <el-input
-          v-model="Resume.position_details"
-          :readonly="position_detailsRO"
-          @change="changeposition_details"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolposition_details"
-          @click="position_detailsRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="11"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="期望薪资"
-      @mouseover.native="toolsalary_requirements = true"
-      @mouseout.native="toolsalary_requirements = false"
-    >
-      <el-col :span="5">
-        <el-input
-          v-model="Resume.salary_requirements"
-          :readonly="salary_requirementsRO"
-          @change="changesalary_requirements"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolsalary_requirements"
-          @click="salary_requirementsRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="期待城市"
-      @mouseover.native="toolwork_city = true"
-      @mouseout.native="toolwork_city = false"
-    >
-      <el-col :span="5">
-        <el-cascader
-          size="large"
-          :options="pcTextArr"
-          v-model="work_cityselectedOptions"
-          :disabled="work_cityRO"
-          @change="changework_city"
-        >
-        </el-cascader>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolwork_city"
-          @click="work_cityRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="16"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="其他城市"
-      @mouseover.native="toolother_city = true"
-      @mouseout.native="toolother_city = false"
-    >
-      <el-col :span="10">
-        <el-input
-          v-model="Resume.other_city"
-          :readonly="other_cityRO"
-          @change="changeother_city"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolother_city"
-          @click="other_cityRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="11"> </el-col>
-    </el-form-item>
-    <el-row
-      @mouseover.native="toolexperiences = true"
-      @mouseout.native="toolexperiences = false"
-    >
-      <el-col :span="4">
-        <h3>工作/实习经历</h3>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-circle-plus-outline"
-          v-show="toolexperiences"
-          @click="addExperience"
-        ></i>
-      </el-col>
-      <el-col :span="17"> </el-col>
-    </el-row>
-    <ul>
-      <el-form
-        v-for="(experience, index) in Resume.experiences"
-        :key="index"
-        label-width="100px"
-        style="margin-left: -40px"
+      <h3>基本信息</h3>
+      <el-form-item
+        label="姓名"
+        @mouseover.native="toolName = true"
+        @mouseout.native="toolName = false"
       >
-        <el-form-item
-          label="公司名称"
-          @mouseover.native="experienceTools[index].toolcompany_name = true"
-          @mouseout.native="experienceTools[index].toolcompany_name = false"
-        >
-          <el-col :span="8">
-            <el-input
-              v-model="experience.company_name"
-              :readonly="experiencesRO"
-              @change="changeexperiences"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="experienceTools[index].toolcompany_name"
-              @click="experiencesRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="13"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="行业"
-          @mouseover.native="experienceTools[index].toolindustry = true"
-          @mouseout.native="experienceTools[index].toolindustry = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="experience.industry"
-              :readonly="experiencesRO"
-              @change="changeexperiences"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="experienceTools[index].toolindustry"
-              @click="experiencesRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="在职时间"
-          @mouseover.native="experienceTools[index].toolwork_time = true"
-          @mouseout.native="experienceTools[index].toolwork_time = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="experience.work_time"
-              :readonly="experiencesRO"
-              @change="changeexperiences"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="experienceTools[index].toolwork_time"
-              @click="experiencesRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="职位名称"
-          @mouseover.native="experienceTools[index].toolposition_name = true"
-          @mouseout.native="experienceTools[index].toolposition_name = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="experience.position_name"
-              :readonly="experiencesRO"
-              @change="changeexperiences"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="experienceTools[index].toolposition_name"
-              @click="experiencesRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="工作内容"
-          @mouseover.native="experienceTools[index].tooljob_description = true"
-          @mouseout.native="experienceTools[index].tooljob_description = false"
-        >
-          <el-col :span="10">
-            <el-input
-              type="textarea"
-              :autosize="{ minRows: 3, maxRows: 10 }"
-              v-model="experience.job_description"
-              :readonly="experiencesRO"
-              @change="changeexperiences"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="experienceTools[index].tooljob_description"
-              @click="experiencesRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="11"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="是否为实习"
-          @mouseover.native="experienceTools[index].toolisInternship = true"
-          @mouseout.native="experienceTools[index].toolisInternship = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="experience.isInternship"
-              :readonly="experiencesRO"
-              @change="changeexperiences"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="experienceTools[index].toolisInternship"
-              @click="experiencesRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <hr />
-      </el-form>
-    </ul>
-    <el-row
-      @mouseover.native="toolprojects = true"
-      @mouseout.native="toolprojects = false"
-    >
-      <el-col :span="4">
-        <h3>项目经历</h3>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-circle-plus-outline"
-          v-show="toolprojects"
-          @click="addProjects"
-        ></i>
-      </el-col>
-      <el-col :span="17"> </el-col>
-    </el-row>
-    <ul>
-      <el-form
-        v-for="(project, index) in Resume.projects"
-        :key="index"
-        label-width="100px"
-        style="margin-left: -40px"
+        <el-col :span="5">
+          <el-input
+            v-model="Resume.name"
+            :readonly="nameRO"
+            @change="changeName"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i class="el-icon-edit" v-show="toolName" @click="nameRO = false"></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="出生日期"
+        @mouseover.native="toolbirth = true"
+        @mouseout.native="toolbirth = false"
       >
-        <el-form-item
-          label="项目名称"
-          @mouseover.native="projectsTools[index].toolproject_name = true"
-          @mouseout.native="projectsTools[index].toolproject_name = false"
-        >
-          <el-col :span="8">
-            <el-input
-              v-model="project.project_name"
-              :readonly="projectsRO"
-              @change="changeprojects"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="projectsTools[index].toolproject_name"
-              @click="projectsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="13"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="角色"
-          @mouseover.native="projectsTools[index].toolrole = true"
-          @mouseout.native="projectsTools[index].toolrole = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="project.role"
-              :readonly="projectsRO"
-              @change="changeprojects"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="projectsTools[index].toolrole"
-              @click="projectsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="项目时间"
-          @mouseover.native="projectsTools[index].toolproject_time = true"
-          @mouseout.native="projectsTools[index].toolproject_time = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="project.project_time"
-              :readonly="projectsRO"
-              @change="changeprojects"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="projectsTools[index].toolproject_time"
-              @click="projectsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="项目描述"
-          @mouseover.native="
-            projectsTools[index].toolproject_description = true
-          "
-          @mouseout.native="
-            projectsTools[index].toolproject_description = false
-          "
-        >
-          <el-col :span="10">
-            <el-input
-              type="textarea"
-              :autosize="{ minRows: 3, maxRows: 10 }"
-              v-model="project.project_description"
-              :readonly="projectsRO"
-              @change="changeprojects"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="projectsTools[index].toolproject_description"
-              @click="projectsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="11"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="项目业绩"
-          @mouseover.native="
-            projectsTools[index].toolproject_performance = true
-          "
-          @mouseout.native="
-            projectsTools[index].toolproject_performance = false
-          "
-        >
-          <el-col :span="10">
-            <el-input
-              type="textarea"
-              :autosize="{ minRows: 3, maxRows: 10 }"
-              v-model="project.project_performance"
-              :readonly="projectsRO"
-              @change="changeprojects"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="projectsTools[index].toolproject_performance"
-              @click="projectsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="11"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="项目链接"
-          @mouseover.native="projectsTools[index].toolproject_link = true"
-          @mouseout.native="projectsTools[index].toolproject_link = false"
-        >
-          <el-col :span="10">
-            <el-input
-              v-model="project.project_link"
-              :readonly="projectsRO"
-              @change="changeprojects"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="projectsTools[index].toolproject_link"
-              @click="projectsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="11"> </el-col>
-        </el-form-item>
-        <hr />
-      </el-form>
-    </ul>
-    <el-row
-      @mouseover.native="tooleducations = true"
-      @mouseout.native="tooleducations = false"
-    >
-      <el-col :span="4">
-        <h3>教育经历</h3>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-circle-plus-outline"
-          v-show="tooleducations"
-          @click="addEducations"
-        ></i>
-      </el-col>
-      <el-col :span="17"> </el-col>
-    </el-row>
-    <ul>
-      <el-form
-        v-for="(education, index) in Resume.educations"
-        :key="index"
-        label-width="100px"
-        style="margin-left: -40px"
+        <el-col :span="5">
+          <el-input
+            v-model="Resume.birthday_date"
+            :readonly="birthday_dateRO"
+            @change="changeBirthdayDate"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolbirth"
+            @click="birthday_dateRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="性别"
+        @mouseover.native="toolGender = true"
+        @mouseout.native="toolGender = false"
       >
-        <el-form-item
-          label="学校名称"
-          @mouseover.native="educationsTools[index].tooluniversity = true"
-          @mouseout.native="educationsTools[index].tooluniversity = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="education.university"
-              :readonly="educationsRO"
-              @change="changeeducations"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="educationsTools[index].tooluniversity"
-              @click="educationsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="学历"
-          @mouseover.native="educationsTools[index].toolqualification = true"
-          @mouseout.native="educationsTools[index].toolqualification = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="education.qualification"
-              :readonly="educationsRO"
-              @change="changeeducations"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="educationsTools[index].toolqualification"
-              @click="educationsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="专业"
-          @mouseover.native="educationsTools[index].toolmajor = true"
-          @mouseout.native="educationsTools[index].toolmajor = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="education.major"
-              :readonly="educationsRO"
-              @change="changeeducations"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="educationsTools[index].toolmajor"
-              @click="educationsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="时间段"
-          @mouseover.native="educationsTools[index].toolstudy_time = true"
-          @mouseout.native="educationsTools[index].toolstudy_time = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="education.study_time"
-              :readonly="educationsRO"
-              @change="changeeducations"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="educationsTools[index].toolstudy_time"
-              @click="educationsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="主修课程"
-          @mouseover.native="educationsTools[index].toolmajor_courses = true"
-          @mouseout.native="educationsTools[index].toolmajor_courses = false"
-        >
-          <el-col :span="10">
-            <el-input
-              type="textarea"
-              :autosize="{ minRows: 3, maxRows: 10 }"
-              v-model="education.major_courses"
-              :readonly="educationsRO"
-              @change="changeeducations"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="educationsTools[index].toolmajor_courses"
-              @click="educationsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="11"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="专业排名"
-          @mouseover.native="educationsTools[index].toolprofession_rank = true"
-          @mouseout.native="educationsTools[index].toolprofession_rank = false"
-        >
-          <el-col :span="5">
-            <el-input
-              v-model="education.profession_rank"
-              :readonly="educationsRO"
-              @change="changeeducations"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="educationsTools[index].toolprofession_rank"
-              @click="educationsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="16"> </el-col>
-        </el-form-item>
-        <el-form-item
-          label="在校经历"
-          @mouseover.native="educationsTools[index].toolstudy_experience = true"
-          @mouseout.native="educationsTools[index].toolstudy_experience = false"
-        >
-          <el-col :span="10">
-            <el-input
-              type="textarea"
-              :autosize="{ minRows: 3, maxRows: 10 }"
-              v-model="education.study_experience"
-              :readonly="educationsRO"
-              @change="changeeducations"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="educationsTools[index].toolstudy_experience"
-              @click="educationsRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="11"> </el-col>
-        </el-form-item>
-        <hr />
-      </el-form>
-    </ul>
-    <el-form-item
-      label="所获荣誉"
-      @mouseover.native="toolhonor_name = true"
-      @mouseout.native="toolhonor_name = false"
-    >
-      <el-col :span="10">
-        <el-input
-          type="textarea"
-          :autosize="{ minRows: 3, maxRows: 10 }"
-          v-model="Resume.honor_name"
-          :readonly="honor_nameRO"
-          @change="changehonor_name"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolhonor_name"
-          @click="honor_nameRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="11"> </el-col>
-    </el-form-item>
-    <el-row
-      @mouseover.native="toolcertificates = true"
-      @mouseout.native="toolcertificates = false"
-    >
-      <el-col :span="4">
-        <h3>资格证书</h3>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-circle-plus-outline"
-          v-show="toolcertificates"
-          @click="addcertificates"
-        ></i>
-      </el-col>
-      <el-col :span="17"> </el-col>
-    </el-row>
-    <ul>
-      <el-form
-        v-for="(certificate_name, index) in Resume.certificate"
-        :key="index"
-        style="margin-left: -40px"
+        <el-col :span="5">
+          <el-select
+            v-model="Resume.gender"
+            placeholder="选择性别"
+            :disabled="genderRO"
+            @change="changeGender"
+          >
+            <el-option label="男" value="male"></el-option>
+            <el-option label="女" value="female"></el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolGender"
+            @click="genderRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="毕业年份"
+        @mouseover.native="toolGraduationYear = true"
+        @mouseout.native="toolGraduationYear = false"
       >
-        <el-form-item
-          label="证书"
-          @mouseover.native="
-            certificatesTools[index].toolcertificate_name = true
-          "
-          @mouseout.native="
-            certificatesTools[index].toolcertificate_name = false
-          "
+        <el-col :span="5">
+          <el-input
+            v-model="Resume.graduation_year"
+            :readonly="graduationYearRO"
+            @change="changeGraduationYear"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolGraduationYear"
+            @click="graduationYearRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="城市"
+        @mouseover.native="toolCity = true"
+        @mouseout.native="toolCity = false"
+      >
+        <el-col :span="5">
+          <el-cascader
+            size="large"
+            :options="pcTextArr"
+            v-model="cityselectedOptions"
+            :disabled="cityRO"
+            @change="changeCity"
+          >
+          </el-cascader>
+        </el-col>
+        <el-col :span="3">
+          <i class="el-icon-edit" v-show="toolCity" @click="cityRO = false"></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="身份"
+        @mouseover.native="toolIdentity = true"
+        @mouseout.native="toolIdentity = false"
+      >
+        <el-col :span="5">
+          <el-select
+            v-model="Resume.identity"
+            placeholder="选择身份"
+            :disabled="identityRO"
+            @change="changeIdentity"
+          >
+            <el-option label="学生" value="学生"></el-option>
+            <el-option label="职场人" value="职场人"></el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolIdentity"
+            @click="identityRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="手机号"
+        @mouseover.native="toolTel = true"
+        @mouseout.native="toolTel = false"
+      >
+        <el-col :span="5">
+          <el-input
+            v-model="Resume.tel"
+            :readonly="telRO"
+            @change="changeTel"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i class="el-icon-edit" v-show="toolTel" @click="telRO = false"></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="邮箱"
+        @mouseover.native="toolEmail = true"
+        @mouseout.native="toolEmail = false"
+      >
+        <el-col :span="5">
+          <el-input
+            v-model="Resume.email"
+            :readonly="emailRO"
+            @change="changeEmail"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolEmail"
+            @click="emailRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="求职状态"
+        @mouseover.native="toolJob_status = true"
+        @mouseout.native="toolJob_status = false"
+      >
+        <el-col :span="5">
+          <el-select
+            v-model="Resume.job_status"
+            placeholder="选择状态"
+            :disabled="job_statusRO"
+            @change="changeJob_status"
+          >
+            <el-option label="随时到岗" value="随时到岗"></el-option>
+            <el-option label="月内到岗" value="月内到岗"></el-option>
+            <el-option label="考虑机会" value="考虑机会"></el-option>
+            <el-option label="暂不考虑" value="暂不考虑"></el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolJob_status"
+            @click="job_statusRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="个人优势"
+        @mouseover.native="toolpersonal_advantages = true"
+        @mouseout.native="toolpersonal_advantages = false"
+      >
+        <el-col :span="8">
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 3, maxRows: 10 }"
+            v-model="Resume.personal_advantages"
+            :readonly="personal_advantagesRO"
+            @change="changepersonal_advantages"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolpersonal_advantages"
+            @click="personal_advantagesRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="13"> </el-col>
+      </el-form-item>
+      <h3>期望岗位</h3>
+      <el-form-item
+        label="期望行业"
+        @mouseover.native="toolexpected_industry = true"
+        @mouseout.native="toolexpected_industry = false"
+      >
+        <el-col :span="5">
+          <el-input
+            v-model="Resume.expected_industry"
+            :readonly="expected_industryRO"
+            @change="changeexpected_industry"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolexpected_industry"
+            @click="expected_industryRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="期望职位"
+        @mouseover.native="toolexpected_position = true"
+        @mouseout.native="toolexpected_position = false"
+      >
+        <el-col :span="5">
+          <el-input
+            v-model="Resume.expected_position"
+            :readonly="expected_positionRO"
+            @change="changeexpected_position"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolexpected_position"
+            @click="expected_positionRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="职位详情"
+        @mouseover.native="toolposition_details = true"
+        @mouseout.native="toolposition_details = false"
+      >
+        <el-col :span="10">
+          <el-input
+            v-model="Resume.position_details"
+            :readonly="position_detailsRO"
+            @change="changeposition_details"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolposition_details"
+            @click="position_detailsRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="11"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="期望薪资"
+        @mouseover.native="toolsalary_requirements = true"
+        @mouseout.native="toolsalary_requirements = false"
+      >
+        <el-col :span="5">
+          <el-input
+            v-model="Resume.salary_requirements"
+            :readonly="salary_requirementsRO"
+            @change="changesalary_requirements"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolsalary_requirements"
+            @click="salary_requirementsRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="期待城市"
+        @mouseover.native="toolwork_city = true"
+        @mouseout.native="toolwork_city = false"
+      >
+        <el-col :span="5">
+          <el-cascader
+            size="large"
+            :options="pcTextArr"
+            v-model="work_cityselectedOptions"
+            :disabled="work_cityRO"
+            @change="changework_city"
+          >
+          </el-cascader>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolwork_city"
+            @click="work_cityRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="16"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="其他城市"
+        @mouseover.native="toolother_city = true"
+        @mouseout.native="toolother_city = false"
+      >
+        <el-col :span="10">
+          <el-input
+            v-model="Resume.other_city"
+            :readonly="other_cityRO"
+            @change="changeother_city"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolother_city"
+            @click="other_cityRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="11"> </el-col>
+      </el-form-item>
+      <el-row
+        @mouseover.native="toolexperiences = true"
+        @mouseout.native="toolexperiences = false"
+      >
+        <el-col :span="4">
+          <h3>工作/实习经历</h3>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-circle-plus-outline"
+            v-show="toolexperiences"
+            @click="addExperience"
+          ></i>
+        </el-col>
+        <el-col :span="17"> </el-col>
+      </el-row>
+      <ul>
+        <el-form
+          v-for="(experience, index) in Resume.experiences"
+          :key="index"
           label-width="100px"
+          style="margin-left: -40px"
         >
-          <el-col :span="10">
-            <el-input
-              v-model="Resume.certificate[index]"
-              :readonly="certificatesRO"
-              @change="changecertificate_name"
-            ></el-input>
-          </el-col>
-          <el-col :span="3">
-            <i
-              class="el-icon-edit"
-              v-show="certificatesTools[index].toolcertificate_name"
-              @click="certificatesRO = false"
-            ></i>
-          </el-col>
-          <el-col :span="11"> </el-col>
-        </el-form-item>
-      </el-form>
-      <hr style="margin-left: -40px" />
-    </ul>
-    <el-form-item
-      label="课余经历"
-      @mouseover.native="toolorganization = true"
-      @mouseout.native="toolorganization = false"
-    >
-      <el-col :span="12">
-        <el-input
-          type="textarea"
-          :autosize="{ minRows: 3, maxRows: 20 }"
-          v-model="Resume.organization"
-          :readonly="organizationRO"
-          @change="changeorganization"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolorganization"
-          @click="organizationRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="11"> </el-col>
-    </el-form-item>
-    <el-form-item
-      label="专业技能"
-      @mouseover.native="toolmajor_skills = true"
-      @mouseout.native="toolmajor_skills = false"
-    >
-      <el-col :span="15">
-        <el-input
-          type="textarea"
-          :autosize="{ minRows: 3, maxRows: 20 }"
-          v-model="Resume.major_skills"
-          :readonly="major_skillsRO"
-          @change="changemajor_skills"
-        ></el-input>
-      </el-col>
-      <el-col :span="3">
-        <i
-          class="el-icon-edit"
-          v-show="toolmajor_skills"
-          @click="major_skillsRO = false"
-        ></i>
-      </el-col>
-      <el-col :span="6"> </el-col>
-    </el-form-item>
-  </el-form>
+          <el-form-item
+            label="公司名称"
+            @mouseover.native="experienceTools[index].toolcompany_name = true"
+            @mouseout.native="experienceTools[index].toolcompany_name = false"
+          >
+            <el-col :span="8">
+              <el-input
+                v-model="experience.company_name"
+                :readonly="experiencesRO"
+                @change="changeexperiences"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="experienceTools[index].toolcompany_name"
+                @click="experiencesRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="13"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="行业"
+            @mouseover.native="experienceTools[index].toolindustry = true"
+            @mouseout.native="experienceTools[index].toolindustry = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="experience.industry"
+                :readonly="experiencesRO"
+                @change="changeexperiences"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="experienceTools[index].toolindustry"
+                @click="experiencesRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="在职时间"
+            @mouseover.native="experienceTools[index].toolwork_time = true"
+            @mouseout.native="experienceTools[index].toolwork_time = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="experience.work_time"
+                :readonly="experiencesRO"
+                @change="changeexperiences"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="experienceTools[index].toolwork_time"
+                @click="experiencesRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="职位名称"
+            @mouseover.native="experienceTools[index].toolposition_name = true"
+            @mouseout.native="experienceTools[index].toolposition_name = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="experience.position_name"
+                :readonly="experiencesRO"
+                @change="changeexperiences"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="experienceTools[index].toolposition_name"
+                @click="experiencesRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="工作内容"
+            @mouseover.native="
+              experienceTools[index].tooljob_description = true
+            "
+            @mouseout.native="
+              experienceTools[index].tooljob_description = false
+            "
+          >
+            <el-col :span="10">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 3, maxRows: 10 }"
+                v-model="experience.job_description"
+                :readonly="experiencesRO"
+                @change="changeexperiences"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="experienceTools[index].tooljob_description"
+                @click="experiencesRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="11"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="是否为实习"
+            @mouseover.native="experienceTools[index].toolisInternship = true"
+            @mouseout.native="experienceTools[index].toolisInternship = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="experience.isInternship"
+                :readonly="experiencesRO"
+                @change="changeexperiences"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="experienceTools[index].toolisInternship"
+                @click="experiencesRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <hr />
+        </el-form>
+      </ul>
+      <el-row
+        @mouseover.native="toolprojects = true"
+        @mouseout.native="toolprojects = false"
+      >
+        <el-col :span="4">
+          <h3>项目经历</h3>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-circle-plus-outline"
+            v-show="toolprojects"
+            @click="addProjects"
+          ></i>
+        </el-col>
+        <el-col :span="17"> </el-col>
+      </el-row>
+      <ul>
+        <el-form
+          v-for="(project, index) in Resume.projects"
+          :key="index"
+          label-width="100px"
+          style="margin-left: -40px"
+        >
+          <el-form-item
+            label="项目名称"
+            @mouseover.native="projectsTools[index].toolproject_name = true"
+            @mouseout.native="projectsTools[index].toolproject_name = false"
+          >
+            <el-col :span="8">
+              <el-input
+                v-model="project.project_name"
+                :readonly="projectsRO"
+                @change="changeprojects"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="projectsTools[index].toolproject_name"
+                @click="projectsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="13"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="角色"
+            @mouseover.native="projectsTools[index].toolrole = true"
+            @mouseout.native="projectsTools[index].toolrole = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="project.role"
+                :readonly="projectsRO"
+                @change="changeprojects"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="projectsTools[index].toolrole"
+                @click="projectsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="项目时间"
+            @mouseover.native="projectsTools[index].toolproject_time = true"
+            @mouseout.native="projectsTools[index].toolproject_time = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="project.project_time"
+                :readonly="projectsRO"
+                @change="changeprojects"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="projectsTools[index].toolproject_time"
+                @click="projectsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="项目描述"
+            @mouseover.native="
+              projectsTools[index].toolproject_description = true
+            "
+            @mouseout.native="
+              projectsTools[index].toolproject_description = false
+            "
+          >
+            <el-col :span="10">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 3, maxRows: 10 }"
+                v-model="project.project_description"
+                :readonly="projectsRO"
+                @change="changeprojects"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="projectsTools[index].toolproject_description"
+                @click="projectsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="11"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="项目业绩"
+            @mouseover.native="
+              projectsTools[index].toolproject_performance = true
+            "
+            @mouseout.native="
+              projectsTools[index].toolproject_performance = false
+            "
+          >
+            <el-col :span="10">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 3, maxRows: 10 }"
+                v-model="project.project_performance"
+                :readonly="projectsRO"
+                @change="changeprojects"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="projectsTools[index].toolproject_performance"
+                @click="projectsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="11"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="项目链接"
+            @mouseover.native="projectsTools[index].toolproject_link = true"
+            @mouseout.native="projectsTools[index].toolproject_link = false"
+          >
+            <el-col :span="10">
+              <el-input
+                v-model="project.project_link"
+                :readonly="projectsRO"
+                @change="changeprojects"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="projectsTools[index].toolproject_link"
+                @click="projectsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="11"> </el-col>
+          </el-form-item>
+          <hr />
+        </el-form>
+      </ul>
+      <el-row
+        @mouseover.native="tooleducations = true"
+        @mouseout.native="tooleducations = false"
+      >
+        <el-col :span="4">
+          <h3>教育经历</h3>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-circle-plus-outline"
+            v-show="tooleducations"
+            @click="addEducations"
+          ></i>
+        </el-col>
+        <el-col :span="17"> </el-col>
+      </el-row>
+      <ul>
+        <el-form
+          v-for="(education, index) in Resume.educations"
+          :key="index"
+          label-width="100px"
+          style="margin-left: -40px"
+        >
+          <el-form-item
+            label="学校名称"
+            @mouseover.native="educationsTools[index].tooluniversity = true"
+            @mouseout.native="educationsTools[index].tooluniversity = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="education.university"
+                :readonly="educationsRO"
+                @change="changeeducations"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="educationsTools[index].tooluniversity"
+                @click="educationsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="学历"
+            @mouseover.native="educationsTools[index].toolqualification = true"
+            @mouseout.native="educationsTools[index].toolqualification = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="education.qualification"
+                :readonly="educationsRO"
+                @change="changeeducations"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="educationsTools[index].toolqualification"
+                @click="educationsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="专业"
+            @mouseover.native="educationsTools[index].toolmajor = true"
+            @mouseout.native="educationsTools[index].toolmajor = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="education.major"
+                :readonly="educationsRO"
+                @change="changeeducations"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="educationsTools[index].toolmajor"
+                @click="educationsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="时间段"
+            @mouseover.native="educationsTools[index].toolstudy_time = true"
+            @mouseout.native="educationsTools[index].toolstudy_time = false"
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="education.study_time"
+                :readonly="educationsRO"
+                @change="changeeducations"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="educationsTools[index].toolstudy_time"
+                @click="educationsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="主修课程"
+            @mouseover.native="educationsTools[index].toolmajor_courses = true"
+            @mouseout.native="educationsTools[index].toolmajor_courses = false"
+          >
+            <el-col :span="10">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 3, maxRows: 10 }"
+                v-model="education.major_courses"
+                :readonly="educationsRO"
+                @change="changeeducations"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="educationsTools[index].toolmajor_courses"
+                @click="educationsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="11"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="专业排名"
+            @mouseover.native="
+              educationsTools[index].toolprofession_rank = true
+            "
+            @mouseout.native="
+              educationsTools[index].toolprofession_rank = false
+            "
+          >
+            <el-col :span="5">
+              <el-input
+                v-model="education.profession_rank"
+                :readonly="educationsRO"
+                @change="changeeducations"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="educationsTools[index].toolprofession_rank"
+                @click="educationsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="16"> </el-col>
+          </el-form-item>
+          <el-form-item
+            label="在校经历"
+            @mouseover.native="
+              educationsTools[index].toolstudy_experience = true
+            "
+            @mouseout.native="
+              educationsTools[index].toolstudy_experience = false
+            "
+          >
+            <el-col :span="10">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 3, maxRows: 10 }"
+                v-model="education.study_experience"
+                :readonly="educationsRO"
+                @change="changeeducations"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="educationsTools[index].toolstudy_experience"
+                @click="educationsRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="11"> </el-col>
+          </el-form-item>
+          <hr />
+        </el-form>
+      </ul>
+      <el-form-item
+        label="所获荣誉"
+        @mouseover.native="toolhonor_name = true"
+        @mouseout.native="toolhonor_name = false"
+      >
+        <el-col :span="10">
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 3, maxRows: 10 }"
+            v-model="Resume.honor_name"
+            :readonly="honor_nameRO"
+            @change="changehonor_name"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolhonor_name"
+            @click="honor_nameRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="11"> </el-col>
+      </el-form-item>
+      <el-row
+        @mouseover.native="toolcertificates = true"
+        @mouseout.native="toolcertificates = false"
+      >
+        <el-col :span="4">
+          <h3>资格证书</h3>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-circle-plus-outline"
+            v-show="toolcertificates"
+            @click="addcertificates"
+          ></i>
+        </el-col>
+        <el-col :span="17"> </el-col>
+      </el-row>
+      <ul>
+        <el-form
+          v-for="(certificate_name, index) in Resume.certificate"
+          :key="index"
+          style="margin-left: -40px"
+        >
+          <el-form-item
+            label="证书"
+            @mouseover.native="
+              certificatesTools[index].toolcertificate_name = true
+            "
+            @mouseout.native="
+              certificatesTools[index].toolcertificate_name = false
+            "
+            label-width="100px"
+          >
+            <el-col :span="10">
+              <el-input
+                v-model="Resume.certificate[index]"
+                :readonly="certificatesRO"
+                @change="changecertificate_name"
+              ></el-input>
+            </el-col>
+            <el-col :span="3">
+              <i
+                class="el-icon-edit"
+                v-show="certificatesTools[index].toolcertificate_name"
+                @click="certificatesRO = false"
+              ></i>
+            </el-col>
+            <el-col :span="11"> </el-col>
+          </el-form-item>
+        </el-form>
+        <hr style="margin-left: -40px" />
+      </ul>
+      <el-form-item
+        label="课余经历"
+        @mouseover.native="toolorganization = true"
+        @mouseout.native="toolorganization = false"
+      >
+        <el-col :span="12">
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 3, maxRows: 20 }"
+            v-model="Resume.organization"
+            :readonly="organizationRO"
+            @change="changeorganization"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolorganization"
+            @click="organizationRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="11"> </el-col>
+      </el-form-item>
+      <el-form-item
+        label="专业技能"
+        @mouseover.native="toolmajor_skills = true"
+        @mouseout.native="toolmajor_skills = false"
+      >
+        <el-col :span="15">
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 3, maxRows: 20 }"
+            v-model="Resume.major_skills"
+            :readonly="major_skillsRO"
+            @change="changemajor_skills"
+          ></el-input>
+        </el-col>
+        <el-col :span="3">
+          <i
+            class="el-icon-edit"
+            v-show="toolmajor_skills"
+            @click="major_skillsRO = false"
+          ></i>
+        </el-col>
+        <el-col :span="6"> </el-col>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>

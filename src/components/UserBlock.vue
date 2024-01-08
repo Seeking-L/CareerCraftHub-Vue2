@@ -12,11 +12,15 @@
     <p>邮箱: {{ this.user.email }}</p>
     <p>电话: {{ this.user.userPhone }}</p>
     <p>城市: {{ this.user.city }}</p>
+     <!-- <el-button round @click="this.downloadFile" style="background-color: #9ecbe4;">导出简历</el-button> -->
+     <el-button type="primary" round @click="this.downloadFile">导出简历</el-button>
   </div>
 </template>
 
 <script>
 import authImg from "./AuthImg.vue";
+import http from "../util/request";
+
 
 export default {
   name: "UserBlock",
@@ -51,6 +55,36 @@ export default {
       this.$router.replace({
         path: "/login",
       });
+    },
+    downloadFile() {
+      // 发送请求到后端的文件下载API
+      // 请求后端接口，获取文件流
+      http({
+        method: "get",
+        url: "/downloadResume", // 替换成实际的后端接口地址
+        responseType: "blob", // 指定响应类型为二进制流
+      })
+        .then((response) => {
+          // 创建一个Blob对象，并指定 MIME 类型
+          const blob = new Blob([response.data], { type: "application/pdf" });
+
+          // 创建一个a标签
+          const link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+
+          // 设置下载的文件名
+          link.download = "resume.pdf"; // 你可以根据后端的设置来指定文件名
+
+          // 添加到页面中，模拟点击进行下载
+          document.body.appendChild(link);
+          link.click();
+
+          // 移除a标签
+          document.body.removeChild(link);
+        })
+        .catch((error) => {
+          console.error("文件下载失败", error);
+        });
     },
   },
   created() {
