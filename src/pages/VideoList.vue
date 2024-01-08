@@ -2,7 +2,7 @@
   <el-main>
     <ul>
       <el-row
-        v-for="(item, index) in this.showlist"
+        v-for="(item,index) in this.showlist"
         :key="index"
         style="margin-top: 20px"
       >
@@ -38,7 +38,7 @@
               style="height: 167px"
             />
             <div style="padding: 0px">
-              <cyText :value="item[0].name" row="1" style="margin-left: 10px" />
+              <cyText :value="item[1].name" row="1" style="margin-left: 10px" />
               <br />
               <span style="margin-left: 20px">播放量：{{ item[1].num }}</span>
             </div>
@@ -57,7 +57,7 @@
               style="height: 167px"
             />
             <div style="padding: 0px">
-              <cyText :value="item[0].name" row="1" style="margin-left: 10px" />
+              <cyText :value="item[2].name" row="1" style="margin-left: 10px" />
               <br />
               <span style="margin-left: 20px">播放量：{{ item[2].num }}</span>
             </div>
@@ -76,7 +76,7 @@
               style="height: 167px"
             />
             <div style="padding: 0px">
-              <cyText :value="item[0].name" row="1" style="margin-left: 10px" />
+              <cyText :value="item[3].name" row="1" style="margin-left: 10px" />
               <br />
               <span style="margin-left: 20px">播放量：{{ item[3].num }}</span>
             </div>
