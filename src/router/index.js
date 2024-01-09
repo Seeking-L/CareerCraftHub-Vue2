@@ -9,6 +9,7 @@ import StatsPage from '../pages/StatsPage.vue';
 import PersonalPage from "../pages/PersonalPage.vue";
 import TestPage from "../pages/TestPage.vue";
 import VideoList from "../pages/VideoList.vue";
+import AnalysePage from "../pages/AnalysePage.vue";
 
 const routes = [
     {
@@ -52,6 +53,12 @@ const routes = [
                 path:'test',
                 components:{
                     Display:TestPage
+                }
+            },
+            {
+                path:'analyse',
+                components:{
+                    Display:AnalysePage
                 }
             },
             {
