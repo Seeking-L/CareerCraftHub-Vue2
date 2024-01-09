@@ -267,7 +267,7 @@ export default {
                   path: "/",
                 });
               } else {
-                this.$message.warning(res.data.message);
+                this.$message.warning(res.data.data.message);
               }
             } else {
               this.$message.error("error");

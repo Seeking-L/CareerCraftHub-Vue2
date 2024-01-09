@@ -11,6 +11,7 @@ import TestPage from "../pages/TestPage.vue";
 import VideoList from "../pages/VideoList.vue";
 import AnalysePage from "../pages/AnalysePage.vue";
 import PostList from '../pages/PostList.vue';
+import PostDetail from '../pages/PostDetail.vue';
 
 const routes = [
     {
@@ -66,6 +67,13 @@ const routes = [
                 path:'post',
                 components:{
                     Display:PostList
+                },
+            },
+            {
+                path:'postDetail/:postId',
+                name:'postDetail',
+                components:{
+                    Display:PostDetail,
                 }
             },
             {

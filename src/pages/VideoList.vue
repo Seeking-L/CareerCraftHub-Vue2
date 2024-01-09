@@ -249,7 +249,7 @@ export default {
       //pagination改变页面
       //pageSize:40
       let pageNum = this.$store.state.pageNum;
-      this.listAfterSearchAndPaginate = this.allvideos.slice(
+      this.listAfterSearchAndPaginate = this.listAfterSearch.slice(
         (pageNum - 1) * 40,
         pageNum * 40
       );

@@ -53,7 +53,7 @@ export default {
     showSearchBox() {
       return (
         this.$route.path === "/mainpage/jobs" ||
-        this.$route.path === "/mainpage/study" ||
+        this.$route.path === "/mainpage/post" ||
         this.$route.path.search("/mainpage/lessonVideos") !== -1
       );
     },
