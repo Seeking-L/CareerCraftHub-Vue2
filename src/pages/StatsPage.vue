@@ -27,9 +27,7 @@
         <el-card>
           <EchartsGauge />
         </el-card>
-        <el-card>
-          <EchartsCiyun />
-        </el-card>
+      
 
       </el-main>
     </el-container>
@@ -45,13 +43,12 @@ import EchartsZhus from "../components/EchartsZhus.vue";
 import EchartsJizuobiao from "../components/EchartsJizuobiao.vue";
 import Echarts2Pies from "../components/Echarts2Pies.vue";
 import EchartsGauge from "../components/EchartsGauge.vue";
-import EchartsCiyun from "../components/EchartsCiyun.vue";
 import 'echarts/lib/chart/bar';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/grid';
 export default {
   name: "StatsPage",
-  components: { EchartsMap, EchartsExample, EchartsSalary, EchartsZhus, EchartsJizuobiao, Echarts2Pies, EchartsGauge,EchartsCiyun },
+  components: { EchartsMap, EchartsExample, EchartsSalary, EchartsZhus, EchartsJizuobiao, Echarts2Pies, EchartsGauge },
 
 };
 </script>

@@ -9,7 +9,8 @@
         <i class="iconfontstats icon-stats" @click="toStats"></i>
         <i class="iconfont icon-job" @click="toJob"></i>
         <i class="iconfont icon-study" @click="toStudy"></i>
-        <i class="iconfonttest icon-test" @click="toTest"></i>
+        <i class="iconfont icon-test" @click="toTest"></i>
+        <i class="iconfonttest icon-job" @click="toAnalyse"></i>
         <authImg
           :imgUrl="avatarSrc"
           :authToken="tokenStr"
@@ -87,6 +88,11 @@ export default {
         path: "/mainpage/personal",
       });
     },
+    toAnalyse(){
+      this.$router.push({
+        path: "/mainpage/analyse",
+      });
+    }
   },
   created() {
     const userStr = localStorage.getItem("user");
