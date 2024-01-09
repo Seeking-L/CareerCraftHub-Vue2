@@ -1,8 +1,27 @@
 <template>
   <el-main>
+    <el-row>
+      <el-col :span="3">
+        <el-card shadow="always" style="margin-left:30%;text-align: center;line-height: 40px;height:83px"> {{this.$route.params.type}} </el-card>
+      </el-col>
+      <el-col :span="7">
+        <el-card shadow="always" style="margin-left:10%;text-align: center;"> 
+           <el-select v-model="typeSearchContent" multiple placeholder="请选择" @change="typeSelect">
+    <el-option
+      v-for="item in types"
+      :key="item"
+      :label="item"
+      :value="item">
+    </el-option>
+  </el-select>
+
+        </el-card>
+      </el-col>
+      <el-col :span="14"></el-col>
+    </el-row>
     <ul>
       <el-row
-        v-for="(item,index) in this.showlist"
+        v-for="(item, index) in this.showlist"
         :key="index"
         style="margin-top: 20px"
       >
@@ -87,7 +106,7 @@
     <pagination
       :listPageChange="listPageChange"
       :total="this.totalonshow"
-      :pageSize=40
+      :pageSize="40"
     />
   </el-main>
 </template>
@@ -95,13 +114,15 @@
 <script>
 import http from "../util/request";
 import cyText from "../components/CyText.vue";
-import pagination from '../components/Pagination.vue';
+import pagination from "../components/Pagination.vue";
 
 export default {
   name: "VideoList",
-  components: { cyText ,pagination},
+  components: { cyText, pagination },
   data() {
     return {
+      typeSearchContent:[],
+      types:[""],
       allvideos: [
         //当前大类下总共有的
         {
@@ -114,7 +135,7 @@ export default {
           type: "",
         },
       ],
-      listAfterSearch:[],//当前搜索框、小类下总共有的
+      listAfterSearch: [], //当前搜索框、小类下总共有的
       listAfterSearchAndPaginate: [
         //当前搜索框、小类、分页下总共有的
         {
@@ -149,11 +170,11 @@ export default {
       }
       return videos;
     },
-    totalonshow(){
-        return this.listAfterSearch.length
+    totalonshow() {
+      return this.listAfterSearch.length;
     },
-    pageNum(){
-        return this.$store.state.pageNum
+    pageNum() {
+      return this.$store.state.pageNum;
     },
     // listAfterSearchAndPaginate(){
     //     return this.listAfterSearchAndPaginate.slice((this.pageNum - 1) * 40, this.pageNum * 40);
@@ -169,10 +190,11 @@ export default {
       .then((res) => {
         if (res.status >= 200 && res.status <= 300) {
           if (res.data.resultCode === 1) {
-            this.$store.commit("setPageNum", 1)
-            this.allvideos = res.data.data;
-            this.listAfterSearch=res.data.data;
-            this.listAfterSearchAndPaginate=this.listAfterSearch.slice(0,40)
+            this.$store.commit("setPageNum", 1);
+            this.allvideos = res.data.data.studyList;
+            this.listAfterSearch = res.data.data.studyList;
+            this.types=res.data.data.types
+            this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, 40);
           } else {
             this.$message.error(res.data.message);
           }
@@ -195,8 +217,8 @@ export default {
         var templist = this.allvideos.filter((item) => {
           return item.name.includes(str);
         });
-        this.listAfterSearch=templist;
-        this.listAfterSearchAndPaginate=this.listAfterSearch.slice(0,40);
+        this.listAfterSearch = templist;
+        this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, 40);
         this.$store.commit("setPageNum", 1);
       },
     },
@@ -212,8 +234,15 @@ export default {
       //pagination改变页面
       //pageSize:40
       let pageNum = this.$store.state.pageNum;
-      this.listAfterSearchAndPaginate = this.allvideos.slice((pageNum - 1) * 40, pageNum * 40);
+      this.listAfterSearchAndPaginate = this.allvideos.slice(
+        (pageNum - 1) * 40,
+        pageNum * 40
+      );
     },
+    typeSelect(){
+      // this.$message.error(this.typeSearchContent)
+      // if(this.typeSearchContent)
+    }
   },
 };
 </script>

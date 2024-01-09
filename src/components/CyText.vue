@@ -113,7 +113,7 @@ export default {
       }
       this.div.style.top = top
       this.div.style.left = left
-      this.div.classList.add('active')
+      // this.div.classList.add('active')
       this.scrollWrap.addEventListener('scroll', this.scrollFun)
     },
     mouseleave(e) {
