@@ -18,7 +18,7 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color:gold;
+  color:#000000;
   margin-right: 10%;
   cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
@@ -28,7 +28,7 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color:gold;
+  color:#000000;
   cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
 .iconfont {
@@ -37,7 +37,7 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color:gold;
+  color:#000000;
   margin-left: 10%;
   cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
@@ -47,7 +47,7 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color:gold;
+  color:#000000;
   margin-left: 10%;
   margin-right: 20px;
   cursor: pointer; /* 添加指针样式，以表示可点击 */

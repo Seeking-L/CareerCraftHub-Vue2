@@ -124,7 +124,7 @@ header {
 
 .navbar-left i {
   font-size: 30px;
-  color: gold;
+  color: #000000;
 }
 
 .navbar-right {
@@ -134,7 +134,7 @@ header {
 
 .navbar-right i {
   font-size: 30px;
-  color: gold;
+  color: #000000;
   margin-left: 20px; /* 调整图标之间的间距 */
 }
 
@@ -195,6 +195,7 @@ header {
   font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
   background-color: #ffffff; /* 设置鼠标悬停时的背景色 */
+  /* 17dced; */
   font-size: 15px;
   font-weight: normal;
   line-height: 1.2;

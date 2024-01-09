@@ -2,19 +2,34 @@
   <el-main>
     <el-row>
       <el-col :span="3">
-        <el-card shadow="always" style="margin-left:30%;text-align: center;line-height: 40px;height:83px"> {{this.$route.params.type}} </el-card>
+        <el-card
+          shadow="always"
+          style="
+            margin-left: 30%;
+            text-align: center;
+            line-height: 40px;
+            height: 81px;
+          "
+        >
+          {{ this.$route.params.type }}
+        </el-card>
       </el-col>
       <el-col :span="7">
-        <el-card shadow="always" style="margin-left:10%;text-align: center;"> 
-           <el-select v-model="typeSearchContent" multiple placeholder="请选择" @change="typeSelect">
-    <el-option
-      v-for="item in types"
-      :key="item"
-      :label="item"
-      :value="item">
-    </el-option>
-  </el-select>
-
+        <el-card shadow="always" style="margin-left: 10%; text-align: center">
+          <el-select
+            v-model="typeSearchContent"
+            multiple
+            placeholder="请选择"
+            @change="typeSelect()"
+          >
+            <el-option
+              v-for="item in types"
+              :key="item"
+              :label="item"
+              :value="item"
+            >
+            </el-option>
+          </el-select>
         </el-card>
       </el-col>
       <el-col :span="14"></el-col>
@@ -121,8 +136,8 @@ export default {
   components: { cyText, pagination },
   data() {
     return {
-      typeSearchContent:[],
-      types:[""],
+      typeSearchContent: [],
+      types: [""],
       allvideos: [
         //当前大类下总共有的
         {
@@ -193,7 +208,7 @@ export default {
             this.$store.commit("setPageNum", 1);
             this.allvideos = res.data.data.studyList;
             this.listAfterSearch = res.data.data.studyList;
-            this.types=res.data.data.types
+            this.types = res.data.data.types;
             this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, 40);
           } else {
             this.$message.error(res.data.message);
@@ -239,10 +254,30 @@ export default {
         pageNum * 40
       );
     },
-    typeSelect(){
-      // this.$message.error(this.typeSearchContent)
-      // if(this.typeSearchContent)
-    }
+    typeSelect() {
+      var str=this.searchBoxContent;
+        var templist1 = this.allvideos.filter((item) => {
+          return item.name.includes(str);
+        });
+        this.listAfterSearch = templist1;
+      if (this.typeSearchContent.length == 0) {
+        this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, 40);
+        this.$store.commit("setPageNum", 1);
+      } else {
+        var templist2 = this.listAfterSearch.filter((item) => {
+          for (let i = 0; i < this.typeSearchContent.length; i++) {
+            if (item.type === this.typeSearchContent[i]) {
+              return true;
+            }
+          }
+          return false;
+        });
+        this.listAfterSearch = templist2;
+        this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, 40);
+        this.$store.commit("setPageNum", 1);
+      }
+      this.$message.error(this.listAfterSearch.length)
+    },
   },
 };
 </script>
