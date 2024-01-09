@@ -6,11 +6,12 @@
       </div>
       <SearchBox v-if="showSearchBox" />
       <div class="navbar-right">
-        <i class="iconfontstats icon-stats" @click="toStats"></i>
+        <i class="iconfontstats icon-pingjia" @click="toPost" style="font-size: 35px;"></i>
+        <i class="iconfont icon-stats" @click="toStats"></i>
         <i class="iconfont icon-job" @click="toJob"></i>
         <i class="iconfont icon-study" @click="toStudy"></i>
         <i class="iconfont icon-test" @click="toTest"></i>
-        <i class="iconfonttest icon-job" @click="toAnalyse"></i>
+        <i class="iconfonttest icon-jurassic_report-analyze" @click="toAnalyse"></i>
         <authImg
           :imgUrl="avatarSrc"
           :authToken="tokenStr"
@@ -61,6 +62,11 @@ export default {
     toHome() {
       this.$router.push({
         path: "/login",
+      });
+    },
+    toPost(){
+      this.$router.push({
+        path: "/mainpage/post",
       });
     },
     toStats() {
@@ -130,7 +136,7 @@ header {
 
 .navbar-left i {
   font-size: 30px;
-  color: #000000;
+  color: #515151;
 }
 
 .navbar-right {
@@ -140,7 +146,7 @@ header {
 
 .navbar-right i {
   font-size: 30px;
-  color: #000000;
+  color: #515151;
   margin-left: 20px; /* 调整图标之间的间距 */
 }
 
@@ -153,11 +159,7 @@ header {
   align-items: center;
 }
 
-.navbar-left.nav-icons i {
-  font-size: 30px;
-  color: gold;
-  margin-right: 20px;
-}
+
 
 .navbar-right.nav-links {
   display: flex;

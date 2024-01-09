@@ -10,6 +10,7 @@ import PersonalPage from "../pages/PersonalPage.vue";
 import TestPage from "../pages/TestPage.vue";
 import VideoList from "../pages/VideoList.vue";
 import AnalysePage from "../pages/AnalysePage.vue";
+import PostList from '../pages/PostList.vue';
 
 const routes = [
     {
@@ -59,6 +60,12 @@ const routes = [
                 path:'analyse',
                 components:{
                     Display:AnalysePage
+                }
+            },
+            {
+                path:'post',
+                components:{
+                    Display:PostList
                 }
             },
             {

@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2028394",
+      "name": "评价",
+      "font_class": "pingjia",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "10594770",
+      "name": "表-分析报表_jurassic",
+      "font_class": "jurassic_report-analyze",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
       "icon_id": "16365847",
       "name": "测验",
       "font_class": "test",

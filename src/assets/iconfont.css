@@ -1,25 +1,24 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4397650 */
-  src: url('iconfont.woff2?t=1704793012906') format('woff2'),
-       url('iconfont.woff?t=1704793012906') format('woff'),
-       url('iconfont.ttf?t=1704793012906') format('truetype');
+  src: url('iconfont.woff2?t=1704348571224') format('woff2'),
+       url('iconfont.woff?t=1704348571224') format('woff'),
+       url('iconfont.ttf?t=1704348571224') format('truetype');
 }
 
-.iconfont {
+/* .iconfont {
   font-family: "iconfont" !important;
-  font-size: 30px;
+  font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-left: 10%;
-  cursor: pointer; /* 添加指针样式，以表示可点击 */
-}
+} */
 .iconfonthome {
   font-family: "iconfont" !important;
   font-size: 30px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color:#000000;
   margin-right: 10%;
   cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
@@ -29,6 +28,17 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color:#000000;
+  cursor: pointer; /* 添加指针样式，以表示可点击 */
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 30px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color:#000000;
+  margin-left: 10%;
   cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
 .iconfonttest {
@@ -37,19 +47,11 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color:#000000;
   margin-left: 10%;
   margin-right: 20px;
   cursor: pointer; /* 添加指针样式，以表示可点击 */
 }
-
-.icon-pingjia:before {
-  content: "\e621";
-}
-
-.icon-jurassic_report-analyze:before {
-  content: "\e6b3";
-}
-
 .icon-test:before {
   content: "\e690";
 }
