@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-aside width="400px">
-      <UserBlock />
+      <UserBlock style="margin-top:50px"/>
     </el-aside>
     <el-main>
       <el-menu

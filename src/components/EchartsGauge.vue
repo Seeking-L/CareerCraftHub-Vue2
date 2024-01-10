@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div ref="gaugeChart" style="width: 350px; height: 350px; background-color: #ffffff; padding: 20px; border-radius: 20px;"></div>
+        <div ref="gaugeChart" style="width: 350px; height: 350px; padding: 20px; border-radius: 20px;"></div>
     </div>
 </template>
  

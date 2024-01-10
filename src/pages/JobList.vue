@@ -1,33 +1,34 @@
 <template>
-    <el-main>
-      <el-row>
-        <el-col :span="12">
-          <ul class="JobList-ul">
-            <JobItem
-              v-for="item in itemsOnShow1"
-              :key="item.jobItemId"
-              :id="item.jobItemId"
-              :title="item.title"
-              :description="item.description"
-              @click.native="toJobDetail(item.url)"
-            />
-          </ul>
-        </el-col>
-        <el-col :span="12">
-          <ul class="JobList-ul">
-            <JobItem
-              v-for="item in itemsOnShow2"
-              :key="item.jobItemId"
-              :id="item.jobItemId"
-              :title="item.title"
-              :description="item.description"
-              @click.native="toJobDetail(item.url)"
-            />
-          </ul>
-        </el-col>
-      </el-row>
-      <Pagination :listPageChange="listPageChange" :total="this.total" :pageSize="10"/>
-    </el-main>
+  <el-main>
+    <el-row>
+      <el-col :span="12">
+        <ul class="JobList-ul">
+          <el-card 
+            v-for="item in itemsOnShow1"
+            :key="item.jobItemId"
+            @click.native="toJobDetail(item.url)"
+          />
+        </ul>
+      </el-col>
+      <el-col :span="12">
+        <ul class="JobList-ul">
+          <JobItem
+            v-for="item in itemsOnShow2"
+            :key="item.jobItemId"
+            :id="item.jobItemId"
+            :title="item.title"
+            :description="item.description"
+            @click.native="toJobDetail(item.url)"
+          />
+        </ul>
+      </el-col>
+    </el-row>
+    <Pagination
+      :listPageChange="listPageChange"
+      :total="this.total"
+      :pageSize="10"
+    />
+  </el-main>
 </template>
 
 <script>
@@ -40,7 +41,18 @@ export default {
   components: { JobItem, Pagination },
   data() {
     return {
-      jobItems: [], //所有数据
+      jobItems: [
+        {
+          id: 0,
+          companyLink: "",
+          companyName: "",
+          jobCity: "",
+          jobName: "",
+          monthlyPay: "",
+          type: "",
+        },
+      ], //所有数据
+      types: ["办公","餐饮","房产","服装","广告","护理","家具","检测","建筑","教育","科研","旅游","汽车","软件","新能源","冶炼","影视","硬件","政府","中介",],
       total: 0, //总记录数
       itemsOnShow: [], //正在显示的数据
       listNow: [],
@@ -57,10 +69,7 @@ export default {
       //pagination改变页面
       //pageSize:10
       let pageNum = this.$store.state.pageNum;
-      this.itemsOnShow = this.listNow.slice(
-        (pageNum - 1) * 10,
-        pageNum * 10
-      );
+      this.itemsOnShow = this.listNow.slice((pageNum - 1) * 10, pageNum * 10);
     },
   },
   computed: {

@@ -6,12 +6,18 @@
       </div>
       <SearchBox v-if="showSearchBox" style="margin-left:10%"/>
       <div class="navbar-right">
-        <i class="iconfontstats icon-pingjia" @click="toPost" style="font-size: 35px;"></i>
-        <i class="iconfont icon-stats" @click="toStats"></i>
-        <i class="iconfont icon-job" @click="toJob"></i>
-        <i class="iconfont icon-study" @click="toStudy"></i>
-        <i class="iconfont icon-test" @click="toTest"></i>
-        <i class="iconfonttest icon-jurassic_report-analyze" @click="toAnalyse"></i>
+        <el-tooltip content="论坛" placement="bottom" effect="light">
+        <i class="iconfontstats icon-pingjia" @click="toPost" style="font-size: 35px;"></i></el-tooltip>
+        <el-tooltip content="统计" placement="bottom" effect="light">
+        <i class="iconfont icon-stats" @click="toStats"></i></el-tooltip>
+        <el-tooltip content="工作" placement="bottom" effect="light">
+        <i class="iconfont icon-job" @click="toJob"></i></el-tooltip>
+        <el-tooltip content="学习" placement="bottom" effect="light">
+        <i class="iconfont icon-study" @click="toStudy"></i></el-tooltip>
+        <el-tooltip content="试题" placement="bottom" effect="light">
+        <i class="iconfont icon-test" @click="toTest"></i></el-tooltip>
+        <el-tooltip content="分析" placement="bottom" effect="light">
+        <i class="iconfonttest icon-jurassic_report-analyze" @click="toAnalyse"></i></el-tooltip>
         <authImg
           :imgUrl="avatarSrc"
           :authToken="tokenStr"
@@ -132,11 +138,13 @@ header {
   width: 80%; /* 或者根据需要设置宽度 */
   z-index: 100;
   box-shadow: 0pt 0.052083333in 11.25pt -5.25pt rgba(0, 0, 0, 0.1);
+  
 }
 
 .navbar-left i {
   font-size: 30px;
-  color: #515151;
+  /* color: #515151; */
+  color: #80ffe2;
 }
 
 .navbar-right {
@@ -146,7 +154,8 @@ header {
 
 .navbar-right i {
   font-size: 30px;
-  color: #515151;
+  /* color: #515151; */
+  color: #80ffe2;
   margin-left: 20px; /* 调整图标之间的间距 */
 }
 
@@ -202,8 +211,9 @@ header {
 header {
   font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
-  background-color: #ffffff; /* 设置鼠标悬停时的背景色 */
+  background-color: #ff80bf; /*设置鼠标悬停时的背景色*/
   /* 17dced; */
+  /* ffffff */
   font-size: 15px;
   font-weight: normal;
   line-height: 1.2;
@@ -229,4 +239,6 @@ header {
   z-index: 100; /*可以调整z-index，确保导航栏在其他元素之上*/
   box-shadow: 0pt 0.052083333in 11.25pt -5.25pt rgba(0, 0, 0, 0.1);
 }
+
+
 </style>
