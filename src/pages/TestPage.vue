@@ -150,4 +150,10 @@ export default {
     margin: 30px 0px 15px 0px;
     border-top: 0.5px solid  #e8eaec;
   }
+  .el-card {
+  /* background-color: #ffc0cb; */
+  /* background-color: #ffe4e1; */
+  background-color: #fffff5;
+  border-radius: 12px;
+}
 </style>

@@ -197,4 +197,10 @@ export default {
   border-radius: 50%; /* 使图像呈圆形 */
   margin-left: 20%;
 }
+.el-card {
+  /* background-color: #ffc0cb; */
+  /* background-color: #ffe4e1; */
+  background-color: #fffff5;
+  border-radius: 12px;
+}
 </style>

@@ -1,5 +1,4 @@
 <template>
-  <div class="pagination">
     <el-pagination
       layout=" prev, pager, next"
       :current-page="this.$store.state.pageNum"
@@ -7,7 +6,6 @@
       :page-size="this.pageSize"
       @current-change="handlePageChange"
     />
-  </div>
 </template>
 
 <script>
@@ -48,5 +46,22 @@ export default {
 <style>
 .pagination {
   margin-left: 36%;
+}
+
+.el-pagination{
+  justify-content: center;
+  margin-left: 35%;
+  margin-top: 1%;
+}
+.el-pagination .number,
+.el-pagination .el-icon{
+  background:transparent;
+}
+
+.el-pagination button,
+.el-pagination button:disabled,
+.el-pagination .button.btn-pre,
+.el-pagination .button.btn-next{
+  background-color: #f1e9d4;
 }
 </style>

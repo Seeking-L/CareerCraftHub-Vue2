@@ -117,12 +117,22 @@ export default {
     searchBoxContent: {
       handler: function (str) {
         console.log("PostList searching------------------------" + str);
-        var templist = this.allList.filter((item) => {
+        var templist1 = this.allList.filter((item) => {
           return item.title.includes(str);
         });
-        this.listAfterSearch = templist;
+        this.listAfterSearch = templist1;
+      if (this.typeSearchContent == 0) {
         this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, this.pageSize);
         this.$store.commit("setPageNum", 1);
+      } else {
+        var templist2 = this.listAfterSearch.filter((item) => {
+          return item.refer === this.typeSearchContent;
+        });
+        this.listAfterSearch = templist2;
+        this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, this.pageSize);
+        this.$store.commit("setPageNum", 1);
+      }
+      this.total=this.listAfterSearch.length;
       },
     },
   },
@@ -194,6 +204,7 @@ export default {
         this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, this.pageSize);
         this.$store.commit("setPageNum", 1);
       }
+      this.total=this.listAfterSearch.length;
     },
   }
 };
@@ -209,5 +220,11 @@ export default {
   right: 100px;
   /* 边框 */
    border: 2px solid #555555;
+}
+.el-card {
+  /* background-color: #ffc0cb; */
+  /* background-color: #ffe4e1; */
+  background-color: #fffff5;
+  border-radius: 12px;
 }
 </style>
