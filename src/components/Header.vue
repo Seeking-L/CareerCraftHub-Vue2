@@ -4,7 +4,7 @@
       <div class="navbar-left">
         <i class="iconfonthome icon-home" @click="toHome"></i>
       </div>
-      <SearchBox v-if="showSearchBox" />
+      <SearchBox v-if="showSearchBox" style="margin-left:10%"/>
       <div class="navbar-right">
         <i class="iconfontstats icon-pingjia" @click="toPost" style="font-size: 35px;"></i>
         <i class="iconfont icon-stats" @click="toStats"></i>
@@ -53,7 +53,7 @@ export default {
     showSearchBox() {
       return (
         this.$route.path === "/mainpage/jobs" ||
-        this.$route.path === "/mainpage/study" ||
+        this.$route.path === "/mainpage/post" ||
         this.$route.path.search("/mainpage/lessonVideos") !== -1
       );
     },

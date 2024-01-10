@@ -4,18 +4,26 @@
       <UserBlock />
     </el-aside>
     <el-main>
-      <Resume />
+        <el-menu
+         router
+          default-active="/mainpage/personal/resume"
+          class="el-menu-demo"
+          mode="horizontal"
+        >
+          <el-menu-item index="/mainpage/personal/resume">个人简历</el-menu-item>
+          <el-menu-item index="/mainpage/personal/myposts">我的发贴</el-menu-item>
+        </el-menu>
+      <router-view name="personalPageContent"></router-view>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import UserBlock from "../components/UserBlock.vue";
-import Resume from "../components/Resume.vue";
 
 export default {
   name: "PersonalPage",
-  components: { UserBlock, Resume },
+  components: { UserBlock },
   data() {
     return {
       form: {
@@ -29,6 +37,8 @@ export default {
         desc: "",
       },
     };
+  },
+  methods: {
   },
 };
 </script>

@@ -11,6 +11,9 @@ import TestPage from "../pages/TestPage.vue";
 import VideoList from "../pages/VideoList.vue";
 import AnalysePage from "../pages/AnalysePage.vue";
 import PostList from '../pages/PostList.vue';
+import PostDetail from '../pages/PostDetail.vue';
+import Resume from "../components/Resume.vue";
+import MyPostList from "../components/MyPostList.vue";
 
 const routes = [
     {
@@ -48,7 +51,23 @@ const routes = [
                 path:'personal',
                 components:{
                     Display:PersonalPage
-                }
+                },
+                children: [
+                    {
+                        path:'resume',
+                        name:'resume',
+                        components:{
+                            personalPageContent:Resume
+                        }
+                    },
+                    {
+                        path:'myposts',
+                        name:'myposts',
+                        components:{
+                            personalPageContent:MyPostList
+                        }
+                    }
+                ]
             },
             {
                 path:'test',
@@ -66,6 +85,13 @@ const routes = [
                 path:'post',
                 components:{
                     Display:PostList
+                },
+            },
+            {
+                path:'postDetail/:postId',
+                name:'postDetail',
+                components:{
+                    Display:PostDetail,
                 }
             },
             {
