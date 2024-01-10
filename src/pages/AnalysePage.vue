@@ -152,5 +152,11 @@ export default {
   font-size: 18px;
   color: #33338f;
 }
+.el-card {
+  /* background-color: #ffc0cb; */
+  /* background-color: #ffe4e1; */
+  background-color: #fffff5;
+  border-radius: 12px;
+}
 
 </style>

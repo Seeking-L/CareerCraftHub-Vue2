@@ -50,7 +50,7 @@
             <img
               :src="'https:' + item[0].pic"
               class="image"
-              style="height: 167px"
+              style="width: 100%; height: 67%; object-fit: cover"
             />
             <div style="padding: 0px">
               <cyText :value="item[0].name" row="1" style="margin-left: 10px" />
@@ -69,7 +69,7 @@
             <img
               :src="'https:' + item[1].pic"
               class="image"
-              style="height: 167px"
+              style="width: 100%; height: 67%; object-fit: cover"
             />
             <div style="padding: 0px">
               <cyText :value="item[1].name" row="1" style="margin-left: 10px" />
@@ -88,7 +88,7 @@
             <img
               :src="'https:' + item[2].pic"
               class="image"
-              style="height: 167px"
+              style="width: 100%; height: 67%; object-fit: cover"
             />
             <div style="padding: 0px">
               <cyText :value="item[2].name" row="1" style="margin-left: 10px" />
@@ -107,7 +107,7 @@
             <img
               :src="'https:' + item[3].pic"
               class="image"
-              style="height: 167px"
+              style="width: 100%; height: 67%; object-fit: cover"
             />
             <div style="padding: 0px">
               <cyText :value="item[3].name" row="1" style="margin-left: 10px" />
@@ -255,11 +255,11 @@ export default {
       );
     },
     typeSelect() {
-      var str=this.searchBoxContent;
-        var templist1 = this.allvideos.filter((item) => {
-          return item.name.includes(str);
-        });
-        this.listAfterSearch = templist1;
+      var str = this.searchBoxContent;
+      var templist1 = this.allvideos.filter((item) => {
+        return item.name.includes(str);
+      });
+      this.listAfterSearch = templist1;
       if (this.typeSearchContent.length == 0) {
         this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, 40);
         this.$store.commit("setPageNum", 1);
@@ -281,5 +281,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.el-card {
+  /* background-color: #ffc0cb; */
+  /* background-color: #ffe4e1; */
+  background-color: #fffff5;
+  border-radius: 12px;
+}
 </style>
