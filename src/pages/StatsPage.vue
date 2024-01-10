@@ -16,7 +16,7 @@
         <el-card>
           <EchartsMap />
         </el-card>
-        <el-card :body-style="{ height: '400px' }" style="margin-top:20px;padding-top:50px">
+        <el-card :body-style="{ height: '500px' }" style="margin-top:20px;padding-top:50px">
           <EchartsSalary />
         </el-card>
       </el-main>
