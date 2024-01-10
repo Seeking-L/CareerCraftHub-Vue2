@@ -67,7 +67,7 @@ export default {
   methods: {
     toHome() {
       this.$router.push({
-        path: "/login",
+        path: "/mainpage/home",
       });
     },
     toPost(){
