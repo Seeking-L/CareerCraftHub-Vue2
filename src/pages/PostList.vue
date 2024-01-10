@@ -194,7 +194,6 @@ export default {
         this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, this.pageSize);
         this.$store.commit("setPageNum", 1);
       }
-      this.$message.error(this.listAfterSearch.length)
     },
   }
 };

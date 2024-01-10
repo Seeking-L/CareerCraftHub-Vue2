@@ -4,15 +4,16 @@
       <UserBlock />
     </el-aside>
     <el-main>
-        <el-menu
-         router
-          default-active="/mainpage/personal/resume"
-          class="el-menu-demo"
-          mode="horizontal"
-        >
-          <el-menu-item index="/mainpage/personal/resume">个人简历</el-menu-item>
-          <el-menu-item index="/mainpage/personal/myposts">我的发贴</el-menu-item>
-        </el-menu>
+      <el-menu
+        :default-active="'/mainpage/personal/resume'"
+        router
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+      >
+        <el-menu-item index="/mainpage/personal/resume">个人简历</el-menu-item>
+        <el-menu-item index="/mainpage/personal/myposts">我的发贴</el-menu-item>
+      </el-menu>
       <router-view name="personalPageContent"></router-view>
     </el-main>
   </el-container>
@@ -38,7 +39,15 @@ export default {
       },
     };
   },
+  mounted(){
+    this.handleSelect("/mainpage/personal/resume")
+  },
   methods: {
+    handleSelect(key) {
+        this.$router.push({
+          path: key,
+        })
+      }
   },
 };
 </script>
