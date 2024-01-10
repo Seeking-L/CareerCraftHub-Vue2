@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="form" :model="form" label-width="80px">
+  <el-form ref="form" :model="form" label-width="80px" style="margin-left:-5%">
     <el-form-item label="分类">
       <el-select
         v-model="form.refer"
@@ -15,19 +15,19 @@
         </el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="标题">
+    <el-form-item label="标题" >
       <el-input v-model="form.title"></el-input>
     </el-form-item>
     <el-form-item label="内容">
       <el-input
         type="textarea"
         v-model="form.content"
-        :autosize="{ minRows: 2, maxRows: 20 }"
+        :autosize="{ minRows: 5, maxRows: 50 }"
       ></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">发布贴子</el-button>
-      <el-button>取消</el-button>
+      <el-button @click="this.closeDialog">取消</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -39,7 +39,6 @@ export default {
   name: "SendPost",
   data() {
     return {
-      canChooseType: false,
       types: [
         {
           id: 1,
@@ -69,6 +68,14 @@ export default {
       },
     };
   },
+  props:{
+    closeDialog: {
+      //父组件PostList的关闭方法
+      type: Function,
+      require: true,
+      default: null,
+    },
+  },
   methods:{
     onSubmit(){
       http
@@ -77,9 +84,7 @@ export default {
             if (res.status >= 200 && res.status <= 300) {
               if (res.data.resultCode === 1) {
                 this.$message.success("发布成功");
-                // this.$router.push({
-                //   path: "/",
-                // });
+                this.$router.push({name: 'postDetail', params: {postId: res.data.data} });
               } else {
                 this.$message.warning(res.data.data.message);
               }
@@ -92,7 +97,6 @@ export default {
             // 处理错误情况
             this.$message.error(error);
           });
-          location.reload();
     },
   }
 };

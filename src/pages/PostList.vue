@@ -44,10 +44,11 @@
       :listPageChange="listPageChange"
       :total="this.total"
       :pageSize="this.pageSize"
+      style="margin-left:40%"
     />
     <el-button class="float-button" circle icon="el-icon-plus" @click="openSendPost"></el-button>
     <el-dialog :visible.sync="dialogTableVisible">
-    <SendPost/>
+    <SendPost :closeDialog="closeDialog"/>
     </el-dialog>
   </el-main>
 </template>
@@ -157,6 +158,9 @@ export default {
       });
   },
   methods:{
+    closeDialog(){
+      this.dialogTableVisible=false;
+    },
     openSendPost(){
       this.dialogTableVisible=true;
     },

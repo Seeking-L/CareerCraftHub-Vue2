@@ -1218,7 +1218,7 @@ export default {
       // },
     };
   },
-  created() {
+  mounted() {
     this.user = JSON.parse(this.$store.state.user);
     this.Resume = JSON.parse(localStorage.getItem("resume"));
 
