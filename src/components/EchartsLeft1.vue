@@ -21,6 +21,15 @@ export default {
     return {
       // 横向柱状图配置项
       xbarOption: {
+        title: {
+          text: '部分省最低工资与最高工资对比图',
+          left: 'center',
+          textStyle: {
+            color: '#333',
+            fontSize: 18,
+            fontWeight: 'bold',
+          },
+        },
         tooltip: {
           trigger: "axis",
           axisPointer: {

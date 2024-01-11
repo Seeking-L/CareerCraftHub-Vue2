@@ -24,6 +24,15 @@ export default {
         tooltip: {
           trigger: "item",
         },
+        title: {
+          text: '各类学习视频收藏数量统计图',
+          left: 'center',
+          textStyle: {
+            color: '#333',
+            fontSize: 18,
+            fontWeight: 'bold',
+          },
+        },
         grid: {
           left: "3%",
           right: "4%",

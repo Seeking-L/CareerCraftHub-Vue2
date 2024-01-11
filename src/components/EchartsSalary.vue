@@ -42,8 +42,20 @@ export default {
     window.addEventListener("resize", resizeChart);
     resizeChart();
     let option = {
+      title: {
+        text: '薪资范围与行业关系图',
+        left: 'center',
+        top: '0%', // Adjust the top position to avoid covering the chart
+        textStyle: {
+          color: '#333',
+          fontSize: 18,
+          fontWeight: 'bold',
+        },
+      },
       legend: {
-        top: '0%', // 调整图例的垂直位置
+        orient: 'vertical', // Set the orientation to vertical
+        right: '0%', // Move the legend to the right
+        top: '5%',
       },
       tooltip: {
         trigger: "axis",

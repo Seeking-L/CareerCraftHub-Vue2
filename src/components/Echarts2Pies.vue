@@ -20,6 +20,15 @@ export default {
       var myChart = this.$echarts.init(this.$refs.homeEcharts);
       // 初始化配置（官网实例详情左侧代码，直接复制过来按项目需求修改即可）
       var option = {
+        title: {
+          text: '学习视频2022-2023数量统计',
+          left: 'center',
+          textStyle: {
+            color: '#333',
+            fontSize: 18,
+            fontWeight: 'bold',
+          },
+        },
         tooltip: {
           trigger: "item",
           formatter: "{a} <br/>{b}: {c} ({d}%)",
@@ -47,17 +56,20 @@ export default {
             radius: [0, "30%"],
 
             label: {
-              position: "inner",
-            },
+          show: true,
+          position: 'inner',
+          color: '#fff',  // Set text color
+          fontSize: 10,   // Set text size
+        },
             labelLine: {
               show: false,
             },
             data: [
-              { value: 45, name: "法场法规", selected: true, itemStyle: { color: '#F7464A' } },
+              { value: 45, name: "法场法规", itemStyle: { color: '#F7464A' } },
               { value: 38, name: "人在职场", itemStyle: { color: '#46BFBD' } },
               { value: 35, name: "人力资源", itemStyle: { color: '#FDB45C' } },
               { value: 28, name: "名校公开课", itemStyle: { color: '#949FB1' } },
-              { value: 27, name: "考研政治", itemStyle: { color: '#4D5360' } },
+              { value: 27, name: "考研政治", itemStyle: { color: '#4D5360' },position: 'inner', },
             ],
           },
           {

@@ -21,6 +21,15 @@ export default {
     return {
       // 垂直柱状图配置项
       barOption: {
+        title: {
+          text: '平均月薪前10行业',
+          left: 'center',
+          textStyle: {
+            color: '#333',
+            fontSize: 18,
+            fontWeight: 'bold',
+          },
+        },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
