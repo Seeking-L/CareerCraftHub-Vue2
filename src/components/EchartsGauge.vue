@@ -6,9 +6,40 @@
  
 <script>
 import * as echarts from 'echarts'
- 
+import http from "../util/request";
+
 export default {
-    mounted() {
+    data(){
+        return{
+            score:0,
+        }
+    },
+    async mounted() {
+        await http
+      .get("/getScore", {
+        params: {
+          // key:value
+        },
+      })
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 300) {
+          if (res.data.resultCode === 1) {
+            this.score = res.data.data;
+            console.log(this.score);
+          } else {
+            this.$message.error(res.data.message);
+          }
+        } else {
+          this.$message.error(res.error);
+          console.log(res.error);
+        }
+      })
+      .catch((error) => {
+        // 处理错误情况
+        this.$message.error(error);
+        console.log(error);
+      });
+
         this.gaugeChart = echarts.init(this.$refs.gaugeChart)
         this.gaugeChart.setOption({
             series: [
@@ -66,7 +97,7 @@ export default {
                         formatter: '{value}'
                     },
                     data: [
-                        { value:80, name: "简历评分" }
+                        { value:this.score, name: "简历评分" }
                     ]
                 }
             ]

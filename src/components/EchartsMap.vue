@@ -580,7 +580,7 @@ export default {
           roam: true,
           scaleLimit: {
             min: 1,
-            max: 3,
+            max: 30,
           },
           zoom: 1.23,
           top: 120,
@@ -879,7 +879,7 @@ export default {
           roam: true,
           scaleLimit: {
             min: 1,
-            max: 3,
+            max: 30,
           },
           zoom: 1.23,
           top: 120,
