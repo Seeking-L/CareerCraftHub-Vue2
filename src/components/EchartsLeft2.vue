@@ -71,7 +71,7 @@ export default {
         },
         series: [
           {
-            name: "平均月薪Top10行业",
+            name: "B站播放量",
             type: "pie",
             radius: ["70%", "50%"],
             center: ["35%", "50%"],

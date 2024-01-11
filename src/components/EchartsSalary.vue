@@ -44,7 +44,7 @@ export default {
     let option = {
       legend: {
         top: '0%', // 调整图例的垂直位置
-    },
+      },
       tooltip: {
         trigger: "axis",
         showContent: false,
@@ -74,7 +74,13 @@ export default {
           ["中介", 39, 1281, 2609, 577, 2400, 705, 639, 740],
         ],
       },
-      xAxis: { type: "category" },
+      xAxis: {
+        type: "category",
+        axisLabel: {
+          interval: 0,  // 强制显示所有刻度标签
+          rotate: 45     // 标签旋转角度，可以根据需要调整
+        },
+      },
       yAxis: { gridIndex: 0 },
       grid: { top: "55%" },
       series: [
