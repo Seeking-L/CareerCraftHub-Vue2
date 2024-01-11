@@ -149,6 +149,7 @@ export default {
           if (res.data.resultCode === 1) {
             this.$store.commit("setPageNum", 1);
             this.allList = res.data.data;
+            this.allList.reverse();
             this.listAfterSearch = res.data.data;
             this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, this.pageSize);
             console.log("aaaaaaaaaaaaaaaaaaaa")
