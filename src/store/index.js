@@ -20,6 +20,16 @@ const mutations = {
         state.token = null
         localStorage.removeItem('user')
         state.user = null
+        state.pageNum = null
+        state.searchBoxContent=null
+        localStorage.removeItem('resume')
+        state.resume = null
+        localStorage.removeItem('resumeAnalyse')
+        state.resumeAnalyse = null
+        localStorage.removeItem('careerGuidance')
+        state.careerGuidance = null
+        localStorage.removeItem('learningGuidance')
+        state.learningGuidance = null
     },
     setPageNum(state, pageNum) {
         state.pageNum = pageNum
