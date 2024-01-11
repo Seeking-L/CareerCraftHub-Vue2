@@ -27,6 +27,13 @@
         <el-card width="400px" style="margin-top:20px;">
           <EchartsRight2 />
         </el-card>
+        <el-card :body-style="{ height: '300px' }" style="margin-top:20px">
+          <img
+              src="@/assets/wordcloud_image.png"
+              class="image"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+        </el-card>
       </el-aside>
     </el-container>
   </div>
