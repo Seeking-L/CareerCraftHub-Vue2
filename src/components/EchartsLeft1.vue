@@ -112,7 +112,7 @@ export default {
 <style scoped>
 .whClass {
   width: 300px;
-  height: 300px;
+  height: 400px;
   display: inline-block;
   margin-left: 40px;
 }

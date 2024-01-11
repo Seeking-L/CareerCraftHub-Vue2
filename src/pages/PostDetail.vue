@@ -5,8 +5,17 @@
         <el-row>
           <h4>{{ this.postType }}{{ this.postDetails.title }}</h4>
         </el-row>
-        <el-row>
-          <span>{{ this.postDetails.content }}</span>
+        <el-row type="flex" :gutter="20" style="flex-wrap: wrap">
+          <span
+            style="
+              margin-left: 10%;
+              display: inline-block;
+              width: 80%;
+              word-break: break-all;
+              white-space: normal;
+            "
+            >{{ this.postDetails.content }}</span
+          >
         </el-row>
         <el-divider />
         <el-row>
@@ -39,8 +48,24 @@
 
         <h4>评论</h4>
         <el-row v-for="comment in comments" :key="comment.id">
-          <el-row><h5>{{ comment.userName }}:</h5></el-row>
-          <el-row><el-col :span="23" :offset="1"><span>{{ comment.content }}</span></el-col></el-row>
+          <el-card style="margin-bottom:1%">
+          <el-row style="margin-top:-2%"
+            ><h5>{{ comment.userName }}:</h5></el-row
+          >
+          <el-row style="margin-top:-1%"
+            ><el-col :span="23" :offset="1"
+              ><span style="
+              display: inline-block;
+              width: 95%;
+              word-break: break-all;
+              white-space: normal;
+            ">{{ comment.content }}</span></el-col
+            ></el-row
+          >
+          <el-row style="margin-top:-1%;text-align:right">
+            <span style="font-size:13px;">{{comment.postTime}}</span>
+          </el-row>
+          </el-card>
         </el-row>
         <el-divider />
         <h4>说点什么吧：</h4>

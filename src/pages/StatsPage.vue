@@ -2,10 +2,10 @@
   <div>
     <el-container>
       <el-aside width="400px">
-        <el-card :body-style="{ height: '350px', padding: '10px' }" style="margin-top:20px;">
+        <el-card :body-style="{ height: '400px', padding: '10px' }" style="margin-top:20px;">
           <EchartsLeft1 />
         </el-card>
-        <el-card :body-style="{ height: '300px', padding: '10px' }" style="margin-top:20px;">
+        <el-card :body-style="{ height: '350px', padding: '10px' }" style="margin-top:20px;">
           <EchartsLeft2 />
         </el-card>
         <el-card :body-style="{ height: '400px', padding: '10px' }" style="margin-top:20px;">
@@ -24,10 +24,10 @@
         <el-card :body-style="{ height: '350px',padding: '0px' }" style="margin-top:20px;">
           <EchartsRight1 style="margin-left: 0px;margin-top:-20px"/>
         </el-card>
-        <el-card width="400px" style="margin-top:20px;">
+        <el-card width="450px" style="margin-top:20px;">
           <EchartsRight2 />
         </el-card>
-        <el-card :body-style="{ height: '300px' }" style="margin-top:20px">
+        <el-card :body-style="{ height: '350px' }" style="margin-top:20px">
           <img
               src="@/assets/wordcloud_image.png"
               class="image"

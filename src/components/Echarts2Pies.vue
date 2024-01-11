@@ -105,7 +105,7 @@ export default {
 /* 给图表容器定义宽高 */
 #myHomeChart {
   width: 400px;
-  height: 400px;
+  height: 450px;
   margin-left: -20px;
 }
 </style>

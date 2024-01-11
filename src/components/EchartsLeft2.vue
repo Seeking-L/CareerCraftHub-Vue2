@@ -26,7 +26,7 @@ export default {
         },
         title: {
           text: '各类学习视频收藏数量统计图',
-          left: 'center',
+          left: "5%",
           textStyle: {
             color: '#333',
             fontSize: 18,
@@ -42,7 +42,7 @@ export default {
         legend: {
           type: "scroll",
           orient: "vertical",
-          right: 10,
+          right:  0,
           top: 20,
           bottom: 20,
           icon: "circle",
@@ -202,7 +202,7 @@ export default {
 <style scoped>
 .whClass {
   width: 300px;
-  height: 300px;
+  height: 350px;
   display: inline-block;
   margin-left: 50px;
 }
