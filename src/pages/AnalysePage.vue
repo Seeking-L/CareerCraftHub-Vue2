@@ -61,6 +61,9 @@ export default {
   methods: {
     fetchData() {
       this.$message.info('请点击按钮生成简历分析');
+      this.resumeAnalyse=this.$store.state.resumeAnalyse
+      this.careerGuidance=this.$store.state.careerGuidance
+      this.learningGuidance=this.$store.state.learningGuidance
     },
     generateResumeAnalysis() {
       this.startLoading();
@@ -73,6 +76,9 @@ export default {
               this.resumeAnalyse = res.data.data.resumeAnalyse;
               this.careerGuidance = res.data.data.careerGuidance;
               this.learningGuidance = res.data.data.learningGuidance;
+              this.$store.commit("setResumeAnalyse", this.resumeAnalyse)
+              this.$store.commit("setCareerGuidance", this.careerGuidance)
+              this.$store.commit("setLearningGuidance", this.learningGuidance)
 
             } else {
               this.$message.error(res.data.message);

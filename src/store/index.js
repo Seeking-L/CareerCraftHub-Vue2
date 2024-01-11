@@ -21,15 +21,27 @@ const mutations = {
         localStorage.removeItem('user')
         state.user = null
     },
-    setPageNum(state,pageNum){
-        state.pageNum=pageNum
+    setPageNum(state, pageNum) {
+        state.pageNum = pageNum
     },
-    setSearchBoxContent(state,searchBoxContent){
-        state.searchBoxContent=searchBoxContent
+    setSearchBoxContent(state, searchBoxContent) {
+        state.searchBoxContent = searchBoxContent
     },
-    setResume(state,resume){
-        state.resume=resume
+    setResume(state, resume) {
+        state.resume = resume
         localStorage.setItem('resume', JSON.stringify(resume))
+    },
+    setResumeAnalyse(state,value){
+        state.resumeAnalyse=value
+        localStorage.setItem('resumeAnalyse',value)
+    },
+    setCareerGuidance(state,value){
+        state.careerGuidance=value
+        localStorage.setItem('careerGuidance',value)
+    },
+    setLearningGuidance(state,value){
+        state.learningGuidance=value
+        localStorage.setItem('learningGuidance',value)
     }
 }
 
@@ -39,10 +51,14 @@ const state = {
     //若localSorage存在token，将值赋给Vuex.state.token
     token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
     //jobList中决定展示哪一页
-    pageNum:1,
-    searchBoxContent:"",
-    IP:"localhost",
-    resume:localStorage.getItem('resume')?localStorage.getItem('resume') :null,
+    pageNum: 1,
+    searchBoxContent: "",
+    IP: "localhost",
+    resume: localStorage.getItem('resume') ? localStorage.getItem('resume') : null,
+    //简历分析
+    resumeAnalyse: localStorage.getItem('resumeAnalyse') ? localStorage.getItem('resumeAnalyse') : null,
+    careerGuidance: localStorage.getItem('careerGuidance') ? localStorage.getItem('careerGuidance') : null,
+    learningGuidance: localStorage.getItem('learningGuidance') ? localStorage.getItem('learningGuidance') : null,
 }
 
 const getters = {
