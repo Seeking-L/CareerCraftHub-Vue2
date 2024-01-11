@@ -90,7 +90,7 @@ export default {
     },
     processText(text) {
       // 将 \t* 替换为换行，将 ** 包裹的内容加粗
-      text = text.replace(/\\t/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+      text = text.replace(/\\t/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\\n/g, '<br>');
       text = text.replace(/\*(.*?)\s/g, '&emsp;· $1');
       return text;
     },
@@ -117,6 +117,12 @@ export default {
   display: flex;
   justify-content: center; /* 水平居中 */
   margin-top: 0px; /* 调整按钮距离上方的间距 */
+}
+
+.el-button--primary {
+  border-radius: 10px; /* 调整为20px以使按钮呈现圆角形状 */
+  background-color: #ff80bf; /* 将背景颜色更改为所需的颜色代码 */
+  color: #80ffe2; /* 设置文本颜色以确保在所选背景颜色上具有良好的可读性 */
 }
 
 .text-container {
