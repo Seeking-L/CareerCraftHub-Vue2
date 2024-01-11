@@ -16,7 +16,7 @@
         <el-card>
           <EchartsMap />
         </el-card>
-        <el-card :body-style="{ height: '400px' }" style="margin-top:20px;padding-top:50px">
+        <el-card :body-style="{ height: '500px' }" style="margin-top:20px;padding-top:50px">
           <EchartsSalary />
         </el-card>
       </el-main>
@@ -61,6 +61,12 @@ export default {
 
 <style scoped>
 /* 你可以在这里添加样式 */
+.el-card {
+  /* background-color: #ffc0cb; */
+  /* background-color: #ffe4e1; */
+  background-color: #fffff5;
+  border-radius: 12px;
+}
 </style>
 
 

@@ -14,6 +14,7 @@ import PostList from '../pages/PostList.vue';
 import PostDetail from '../pages/PostDetail.vue';
 import Resume from "../components/Resume.vue";
 import MyPostList from "../components/MyPostList.vue";
+import HomePage from "../pages/HomePage.vue";
 
 const routes = [
     {
@@ -23,6 +24,12 @@ const routes = [
             Display: JobList
         },
         children: [
+            {
+                path:'home',
+                components:{
+                    Display:HomePage
+                }
+            },
             {
                 path: 'jobs',
                 components: {

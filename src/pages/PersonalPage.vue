@@ -10,9 +10,10 @@
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
+        style="border-radius:12px;background-color: #fffff5;"
       >
-        <el-menu-item index="/mainpage/personal/resume">个人简历</el-menu-item>
-        <el-menu-item index="/mainpage/personal/myposts">我的发贴</el-menu-item>
+        <el-menu-item index="/mainpage/personal/resume" style="border-radius:12px;background-color: #fffff5;">个人简历</el-menu-item>
+        <el-menu-item index="/mainpage/personal/myposts" style="border-radius:12px;background-color: #fffff5;">我的发贴</el-menu-item>
       </el-menu>
       <router-view name="personalPageContent"></router-view>
     </el-main>
@@ -52,5 +53,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.el-card {
+  /* background-color: #ffc0cb; */
+  /* background-color: #ffe4e1; */
+  background-color: #fffff5;
+  border-radius: 12px;
+}
 </style>
