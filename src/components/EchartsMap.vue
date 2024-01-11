@@ -525,6 +525,16 @@ export default {
   methods: {
     initMap() {
       var option = {
+        title: {
+        text: '各省各行业职位数量',
+        left: 'center',
+        top: '0%', // Adjust the top position to avoid covering the chart
+        textStyle: {
+          color: '#333',
+          fontSize: 18,
+          fontWeight: 'bold',
+        },
+      },
         tooltip: {
           trigger: "item",
           formatter: function (params) {
@@ -580,7 +590,7 @@ export default {
           roam: true,
           scaleLimit: {
             min: 1,
-            max: 3,
+            max: 30,
           },
           zoom: 1.23,
           top: 120,
@@ -823,6 +833,16 @@ export default {
     handleLegendClick(params){
       console.log(params)
       var option = {
+        title: {
+        text: '各省各行业职位数量',
+        left: 'center',
+        top: '0%', // Adjust the top position to avoid covering the chart
+        textStyle: {
+          color: '#333',
+          fontSize: 18,
+          fontWeight: 'bold',
+        },
+      },
         tooltip: {
           trigger: "item",
           formatter: function (params) {
@@ -879,7 +899,7 @@ export default {
           roam: true,
           scaleLimit: {
             min: 1,
-            max: 3,
+            max: 30,
           },
           zoom: 1.23,
           top: 120,
