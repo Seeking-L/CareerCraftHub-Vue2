@@ -21,6 +21,15 @@ export default {
     return {
       // 横向柱状图配置项
       xbarOption: {
+        title: {
+          text: '部分省最低工资与最高工资对比图',
+          left: 'center',
+          textStyle: {
+            color: '#333',
+            fontSize: 18,
+            fontWeight: 'bold',
+          },
+        },
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -49,16 +58,16 @@ export default {
             axisLine: {
               show: false,
             },
-            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            data: ["上海", "北京", "浙江", "天津", "山西", "江西", "广东","广西", "陕西","福建"],
           },
         ],
         series: [
           {
-            name: "one",
+            name: "最低工资",
             type: "bar",
             stack: "total",
             barWidth: 20,
-            data: [320, 302, 301, 334, 390, 330, 320],
+            data: [10963.82, 10945.49, 10150.98, 10050.00, 9404.76, 9213.18, 9534.37, 8791.23, 8754.96, 8506.74],
             itemStyle: {
               normal: {
                 barBorderRadius: [0, 30, 30, 0],
@@ -66,10 +75,10 @@ export default {
             },
           },
           {
-            name: "two",
+            name: "最高工资",
             type: "bar",
             barGap: "-100%",
-            data: [3201, 3021, 3011, 3341, 3901, 3301, 3201],
+            data: [17668.75, 18052.85, 16235.92, 16923.61, 14464.29, 14708.71, 15534.52, 14057.89, 15076.42, 13728.46],
             barWidth: 20,
             itemStyle: {
               normal: {

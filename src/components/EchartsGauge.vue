@@ -13,12 +13,12 @@ export default {
         this.gaugeChart.setOption({
             series: [
                 {
-                    name: '评价',
+                    name: '评分',
                     type: 'gauge',
                     center: ['50%', '55%'],
                     radius: '75%',
                     min: 0,
-                    max: 300,
+                    max: 100,
                     itemStyle: {
                         color: '#4FC3F7',
                         shadowColor: 'rgba(0,138,255,0.45)'
@@ -66,7 +66,7 @@ export default {
                         formatter: '{value}'
                     },
                     data: [
-                        { value: 270, name: "好评数" }
+                        { value:80, name: "简历评分" }
                     ]
                 }
             ]
