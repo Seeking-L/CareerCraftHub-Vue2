@@ -21,6 +21,15 @@ export default {
     return {
       // 垂直柱状图配置项
       barOption: {
+        title: {
+          text: '平均月薪前10行业',
+          left: 'center',
+          textStyle: {
+            color: '#333',
+            fontSize: 18,
+            fontWeight: 'bold',
+          },
+        },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -35,7 +44,11 @@ export default {
         },
         xAxis: {
           type: 'category',
-          data: ['软件', '新能源', '冶炼', '政府', '建筑', '科研', '广告', '教育', '家具', '房产']
+          data: ['软件', '新能源', '冶炼', '政府', '建筑', '科研', '广告', '教育', '家具', '房产'],
+          axisLabel: {
+            interval: 0,  // 强制显示所有刻度标签
+            rotate: 45     // 标签旋转角度，可以根据需要调整
+          },
         },
         yAxis: {
           type: 'value'
