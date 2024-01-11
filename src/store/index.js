@@ -52,6 +52,10 @@ const mutations = {
     setLearningGuidance(state,value){
         state.learningGuidance=value
         localStorage.setItem('learningGuidance',value)
+    },
+    setScore(state,value){
+        state.score=value
+        localStorage.setItem("score",value)
     }
 }
 
@@ -69,6 +73,7 @@ const state = {
     resumeAnalyse: localStorage.getItem('resumeAnalyse') ? localStorage.getItem('resumeAnalyse') : null,
     careerGuidance: localStorage.getItem('careerGuidance') ? localStorage.getItem('careerGuidance') : null,
     learningGuidance: localStorage.getItem('learningGuidance') ? localStorage.getItem('learningGuidance') : null,
+    score:localStorage.getItem('score') ? localStorage.getItem('score') : null,
 }
 
 const getters = {
