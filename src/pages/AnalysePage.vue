@@ -1,11 +1,16 @@
 <template>
-  <el-main>
+  <keep-alive>
+    <el-main>
     <div class="analysis-container">
       <!-- 左侧区域 -->
       <div class="heatmap-container">
-        <!-- ECharts 图表 -->
-        <EchartsPieChart />
-        <div class="button-container"> <!-- 新增一个容器用于水平居中按钮 -->
+        <!-- 图片 -->
+        <img
+              src="@/assets/weixiangying.jpg"
+              class="image"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+        <div class="button-container">
           <el-button type="primary" @click="generateResumeAnalysis">生成简历分析</el-button>
         </div>
       </div>
@@ -19,80 +24,89 @@
         </el-card>
 
         <!-- 第二个 el-card，学习建议 -->
-        <el-card class="learning-guidance-card" :body-style="{ padding: '20px' }" :bordered="false">
+        <el-card class="learning-guidance-card" :body-style="{ padding: '20px' }" :bordered="false" :loading="loadingInstance !== null">
           <h2 class="card-title">学习建议</h2>
           <div class="learning-guidance" v-html="processText(learningGuidance)"></div>
         </el-card>
 
         <!-- 第三个 el-card，职业规划建议 -->
-        <el-card class="career-plan-card" :body-style="{ padding: '20px' }" :bordered="false">
+        <el-card class="career-plan-card" :body-style="{ padding: '20px' }" :bordered="false" :loading="loadingInstance !== null">
           <h2 class="card-title">职业规划建议</h2>
           <div class="career-plan-suggestions" v-html="processText(careerGuidance)"></div>
         </el-card>
       </div>
     </div>
   </el-main>
+  </keep-alive>
 </template>
 
 <script>
 import http from "../util/request";
-import EchartsPieChart from "@/components/EchartsPieChart.vue";
-// import { Loading } from 'element-ui';
 
 export default {
   components: {
-    EchartsPieChart,
+    
   },
   data() {
     return {
       resumeAnalyse: "",
       careerGuidance: "",
       learningGuidance: "",
-      loadingInstance: null, // Loading 实例变量
+      loadingInstance: null,
     };
-},
-
+  },
   mounted() {
     this.fetchData();
   },
   methods: {
     fetchData() {
       this.$message.info('请点击按钮生成简历分析');
-
-      
     },
-    generateResumeAnalysis(){
-      // this.startLoading(); // 启动 Loading 动画
+    generateResumeAnalysis() {
+      this.startLoading();
 
-    // 调用后端生成简历分析的接口
-    http.get("/generateResumeAnalysis", {})
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 300) {
-          if (res.data.resultCode === 1) {
-            this.resumeAnalyse = res.data.data.resumeAnalyse;
-            this.careerGuidance = res.data.data.careerGuidance;
-            this.learningGuidance = res.data.data.learningGuidance;
+      // 调用后端生成简历分析的接口
+      http.get("/generateResumeAnalysis", {})
+        .then((res) => {
+          if (res.status >= 200 && res.status <= 300) {
+            if (res.data.resultCode === 1) {
+              this.resumeAnalyse = res.data.data.resumeAnalyse;
+              this.careerGuidance = res.data.data.careerGuidance;
+              this.learningGuidance = res.data.data.learningGuidance;
+
+            } else {
+              this.$message.error(res.data.message);
+            }
           } else {
-            this.$message.error(res.data.message);
+            this.$message.error(res.error);
+            console.log(res.error);
           }
-        } else {
-          this.$message.error(res.error);
-          console.log(res.error);
-        }
-      })
-      .catch((error) => {
-        this.$message.error(error);
-        console.log(error);
-      })
-      .finally(() => {
-        // this.stopLoading(); // 停止 Loading 动画
-      });
+        })
+        .catch((error) => {
+          this.$message.error(error);
+          console.log(error);
+        })
+        .finally(() => {
+          this.stopLoading();
+        });
     },
     processText(text) {
-      // 将 \t* 替换为换行，将 ** 包裹的内容加粗
-      text = text.replace(/\\t/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\\n/g, '<br>');
+      text = text.replace(/\\t/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\/n/g, '<br>');
       text = text.replace(/\*(.*?)\s/g, '&emsp;· $1');
       return text;
+    },
+    startLoading() {
+      this.loadingInstance = this.$loading({
+        lock: true,
+        text: '加载中...',
+        background: 'rgba(255, 255, 255, 0.7)',
+      });
+    },
+    stopLoading() {
+      if (this.loadingInstance !== null) {
+        this.loadingInstance.close();
+        this.loadingInstance = null;
+      }
     },
   },
 };
@@ -121,8 +135,8 @@ export default {
 
 .el-button--primary {
   border-radius: 10px; /* 调整为20px以使按钮呈现圆角形状 */
-  background-color: #ff80bf; /* 将背景颜色更改为所需的颜色代码 */
-  color: #80ffe2; /* 设置文本颜色以确保在所选背景颜色上具有良好的可读性 */
+  background-color: #ff80bf !important; /* 将背景颜色更改为所需的颜色代码 */
+  color: #80ffe2 !important; /* 设置文本颜色以确保在所选背景颜色上具有良好的可读性 */
 }
 
 .text-container {
