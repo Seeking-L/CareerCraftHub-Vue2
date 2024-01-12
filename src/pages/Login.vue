@@ -276,7 +276,7 @@ export default {
           })
           .catch((error) => {
             // 处理错误情况
-            alert("error");
+            this.$message.error("error");
             console.log(error);
             // // 用拿到的后台状态数据进行判断登录
             // if (res.data.meta.status !== 200) return this.$message.error('登录失败')

@@ -124,6 +124,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+    mode:'history',
     routes
 })
 // 挂载路由导航守卫-登录
@@ -132,8 +133,8 @@ router.beforeEach((to, from, next) => {
     // from从哪个路径跳转来
     // next函数，表示下一步放行
     // 如果路径是登录页，下一步
+    console.log(to.path)
     if (to.path === '/login') return next()
-    if(to.path === '/mainpage/home') return next()//主页不用登录
     // 获取token
     const tokenStr = localStorage.getItem('token')
     // 如果没有获取到token，返回登录页
