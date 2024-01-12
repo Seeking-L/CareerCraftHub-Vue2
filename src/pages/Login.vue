@@ -99,7 +99,7 @@
       <div :class="overlaytitle">
         <div class="overlaytitle-Signin" v-if="disfiex == 0">
           <h2 class="overlaytitleH2" v-if="ifdisplay == 1">Hello,Friend!</h2>
-          <p class="overlaytitleP" v-if="ifdisplay == 1">
+          <p class="overlaytitleP" v-if="ifdisplay == 1" style="width:80%">
             Enter your personal details and start journey with us
           </p>
           <div class="buttongohs" @click="SigninUI" v-if="ifdisplay == 1">
@@ -108,7 +108,7 @@
         </div>
         <div class="overlaytitle-Signup" v-if="disfiex == 1">
           <h2 class="overlaytitleH2" v-if="ifdisplay == 1">Welcome Back!</h2>
-          <p class="overlaytitleP" v-if="ifdisplay == 1">
+          <p class="overlaytitleP" v-if="ifdisplay == 1" style="width:80%">
             To keep connected with us please login with your personal info
           </p>
           <div class="buttongohs" @click="SignupUI" v-if="ifdisplay == 1">
