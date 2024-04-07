@@ -1,5 +1,14 @@
-# ourpages
-XJTU-SE-2023冬季实训-CareerCraftHub项目，前端页面
+# CareerCraftHub -Vue2
+ 2023-2024 XJTUSE 冬季小学期
+
+ 小组项目的前端部分（Vue2）
+
+ 配套Java Server：https://github.com/Seeking-L/CareerCraftHub-Server
+
+## 项目简介：
+一个职业能力平台
+
+
 ## Project setup
 ```
 npm install
