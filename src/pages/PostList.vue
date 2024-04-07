@@ -150,9 +150,11 @@ export default {
             this.$store.commit("setPageNum", 1);
             this.allList = res.data.data;
             this.allList.reverse();
+            console.log("----------------------")
+            console.log(this.allList)
+            console.log("-----------------------")
             this.listAfterSearch = res.data.data;
             this.listAfterSearchAndPaginate = this.listAfterSearch.slice(0, this.pageSize);
-            console.log("aaaaaaaaaaaaaaaaaaaa")
             console.log(this.listAfterSearchAndPaginate)
           } else {
             this.$message.error(res.data.message);
